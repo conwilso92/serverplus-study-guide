@@ -54,4 +54,3 @@ Part of a broader CompTIA certification study toolkit:
 
 Built while studying for the CompTIA Server+ certification at Star V Learning Centers, Jacksonville, FL. Materials synthesized from course slide decks and official SK0-005 exam objectives.
 
-**Certifications:** CompTIA A+ (Core 1 & Core 2 passed) · Network+ (in progress) · Server+ (in progress)
