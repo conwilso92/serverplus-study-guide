@@ -383,7 +383,7 @@
       <div class="section-block">
         <div class="section-title">Converged Network Adapters (CNA)</div>
         <p>A CNA combines a standard NIC and a Fibre Channel HBA (Host Bus Adapter) into a single card. It can carry both standard Ethernet traffic AND Fibre Channel storage traffic on the same physical adapter and cable — enabling FCoE. Reduces the number of cards needed and simplifies cabling in converged infrastructure.</p>
-        <div class="callout callout-new">CNAs were a slide that extracted blank in v1. Key point: CNA = NIC + HBA in one card. Used specifically with FCoE to converge storage and network traffic onto a single adapter.</div>
+        <div class="callout callout-new">Key point: CNA = NIC + HBA in one card. Used specifically with FCoE to converge storage and network traffic onto a single adapter.</div>
       </div>
 
       <div class="section-block">
@@ -445,7 +445,7 @@
           <span class="def-term">ZFS</span><span class="def-val">Zettabyte File System. Open source (originally Sun). Max file: 16EB. Max volume: 256ZB. Built-in RAID (RAIDZ), snapshots, checksumming, deduplication. Used in TrueNAS.</span>
           <span class="def-term">VMFS</span><span class="def-val">VMware File System. Used exclusively by VMware vSphere/ESXi for datastore volumes. Max 64TB. Optimized for concurrent VM I/O.</span>
         </div>
-        <div class="callout callout-mil">Your TrueNAS runs ZFS — you already know RAIDZ1 = RAID5 equivalent, snapshots are instant, and ZFS self-heals bit rot by comparing data against checksums. That homelab experience directly maps to enterprise ZFS deployments.</div>
+        <div class="callout callout-mil">RAIDZ1 = RAID5 equivalent, snapshots are instant, and ZFS self-heals bit rot by comparing data against checksums. That homelab experience directly maps to enterprise ZFS deployments.</div>
       </div>
 
       <div class="section-block">
@@ -644,7 +644,7 @@
             <tr><td><span class="hl-blue">JBOD</span></td><td>Just a Bunch of Disks</td><td>1</td><td>0 (100% usable)</td><td><span class="bad">None</span></td><td>Normal</td><td>Flexible pooling, no redundancy</td></tr>
           </tbody>
         </table>
-        <div class="callout callout-exam">Capacity math: RAID 5 = (N−1) × drive size. RAID 6 = (N−2) × drive size. RAID 10 = (N/2) × drive size. Example: RAID 6 with 4×250GB = (4−2)×250 = 500GB usable. Your TrueNAS RAIDZ1 (3×20TB) ≈ RAID 5: (3−1)×20TB = 40TB usable.</div>
+        <div class="callout callout-exam">Capacity math: RAID 5 = (N−1) × drive size. RAID 6 = (N−2) × drive size. RAID 10 = (N/2) × drive size. Example: RAID 6 with 4×250GB = (4−2)×250 = 500GB usable. My TrueNAS RAIDZ1 (3×20TB) ≈ RAID 5: (3−1)×20TB = 40TB usable.</div>
       </div>
 
       <div class="section-block">
@@ -691,7 +691,7 @@
         <div class="section-title">Shared Storage Types</div>
         <div class="def-grid">
           <span class="def-term">DAS</span><span class="def-val">Direct Attached Storage. Connected to one server (USB, SATA, SAS). Not shared. Simple, fast, cheap. Cannot be accessed by other servers.</span>
-          <span class="def-term">NAS</span><span class="def-val">Network Attached Storage. File-level storage over the network. Multiple servers access simultaneously. Uses NFS (Linux/Unix) or CIFS/SMB (Windows). Your TrueNAS = NAS.</span>
+          <span class="def-term">NAS</span><span class="def-val">Network Attached Storage. File-level storage over the network. Multiple servers access simultaneously. Uses NFS (Linux/Unix) or CIFS/SMB (Windows).</span>
           <span class="def-term">SAN</span><span class="def-val">Storage Area Network. Block-level access. Server sees storage as a local disk. Uses Fibre Channel or iSCSI. Fastest and most expensive shared storage.</span>
           <span class="def-term">iSCSI</span><span class="def-val">SCSI commands encapsulated in IP packets. SAN over standard Ethernet. Cost-effective alternative to Fibre Channel. Uses existing network infrastructure.</span>
           <span class="def-term">Fibre Channel (FC)</span><span class="def-val">Dedicated high-speed storage network. 8/16/32 Gbps. Requires separate FC switches (not Ethernet). Lowest latency, highest cost.</span>
