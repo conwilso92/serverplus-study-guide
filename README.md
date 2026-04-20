@@ -2,7 +2,7 @@
 
 A comprehensive study guide for the CompTIA Server+ (SK0-005) certification exam, synthesized from course materials and official exam objectives. Built as a single dark-mode HTML file with full anchor navigation.
 
-🔗 **[View the Study Guide](https://conwilso92.github.io/server-plus-study-guide)**
+🔗 **[View the Study Guide](https://conwilso92.github.io/serverplus-study-guide)**
 
 ---
 
