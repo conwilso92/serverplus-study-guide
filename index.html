@@ -1270,6 +1270,61 @@
         </ul>
       </div>
 
+      <div class="section-block">
+        <div class="section-title">LED Indicator Reference</div>
+
+        <p class="mini-h">Server Chassis / System LEDs</p>
+        <div class="def-grid">
+          <span class="def-term">Power — Solid Green</span><span class="def-val">System powered on and operating normally.</span>
+          <span class="def-term">Power — Blinking Green</span><span class="def-val">System in standby/sleep mode. Receiving standby power.</span>
+          <span class="def-term">Power — Off</span><span class="def-val">No power. Check power cable, PDU, PSU.</span>
+          <span class="def-term">System ID — Solid Blue</span><span class="def-val">Unit identification active. Admin remotely activated to locate the physical server in a rack. Server is still running normally.</span>
+          <span class="def-term">Health/Fault — Solid Amber</span><span class="def-val">Hardware fault detected. Server may still be running. Check iLO/iDRAC immediately for fault details.</span>
+          <span class="def-term">Health/Fault — Blinking Amber</span><span class="def-val">Warning condition. Non-critical fault — redundant component degraded but system still operational.</span>
+        </div>
+
+        <p class="mini-h">Hard Drive / Drive Bay LEDs</p>
+        <div class="def-grid">
+          <span class="def-term">Activity — Blinking Green</span><span class="def-val">Normal I/O. Drive is reading or writing. Expected behavior under load.</span>
+          <span class="def-term">Fault — Solid Amber</span><span class="def-val">Drive has failed or is failing. Replace if hot-swap capable. Confirm the correct bay before pulling — pulling the wrong drive in RAID 5 destroys the array.</span>
+          <span class="def-term">Fault — Blinking Amber</span><span class="def-val">Drive locate function active OR predictive failure (SMART warning). Replace soon.</span>
+          <span class="def-term">Rebuild — Alternating Green/Amber</span><span class="def-val">RAID rebuild in progress. Do not remove. Array is degraded — a second failure now means data loss.</span>
+          <span class="def-term">Safe to Remove — Solid Green</span><span class="def-val">Drive logically removed from array and safe to hot-swap. Varies by vendor — always confirm in documentation.</span>
+          <span class="def-term">No LED</span><span class="def-val">Bay is empty or drive has no power. Check backplane connection and drive seating.</span>
+        </div>
+        <div class="callout callout-warning">Before pulling a drive, verify you have the correct bay. Amber = failed drive. Pulling a healthy drive by mistake in RAID 5 or RAID 10 triggers a second fault and destroys the array. Always confirm via RAID controller software before touching hardware.</div>
+
+        <p class="mini-h">PSU LEDs</p>
+        <div class="def-grid">
+          <span class="def-term">PSU — Solid Green</span><span class="def-val">PSU healthy and supplying power normally.</span>
+          <span class="def-term">PSU — Solid Amber</span><span class="def-val">PSU fault. Receiving AC input but not outputting correctly. Replace PSU.</span>
+          <span class="def-term">PSU — Blinking Amber</span><span class="def-val">Warning — over-temperature, over-current, or standby issue.</span>
+          <span class="def-term">PSU — Off (AC connected)</span><span class="def-val">PSU failed completely or input power lost. Check PDU circuit breaker and power cable first.</span>
+        </div>
+
+        <p class="mini-h">NIC LEDs</p>
+        <div class="def-grid">
+          <span class="def-term">Link — Solid Green</span><span class="def-val">Physical link established. No traffic required to show this.</span>
+          <span class="def-term">Link — Off</span><span class="def-val">No link. Check cable, switch port, NIC seating.</span>
+          <span class="def-term">Activity — Blinking Green</span><span class="def-val">Traffic flowing. Normal operation under load.</span>
+          <span class="def-term">Speed — Solid Amber</span><span class="def-val">Connected at 100 Mbps instead of full speed. Suspect auto-negotiation mismatch or wrong cable.</span>
+          <span class="def-term">Speed — Off (10G NIC)</span><span class="def-val">On some 10G NICs, off = running at 10G (full speed). Lit = running at lower speed. Always check vendor docs — do not assume off means no link.</span>
+        </div>
+        <div class="callout callout-exam">Solid green link LED with no activity blinking = link is up but no traffic. Check the OS or driver, not the cable. Amber speed LED = connected but not at full speed — suspect cable category (need CAT6a for 10G at 100m) or forced/auto negotiation mismatch.</div>
+
+        <p class="mini-h">Managed Switch Port LEDs</p>
+        <div class="def-grid">
+          <span class="def-term">Port — Solid Green</span><span class="def-val">Link established, no current activity.</span>
+          <span class="def-term">Port — Blinking Green</span><span class="def-val">Link established and traffic flowing. Normal operation.</span>
+          <span class="def-term">Port — Solid Amber</span><span class="def-val">STP blocking state. Port is not forwarding traffic. May be intentional or a misconfiguration.</span>
+          <span class="def-term">Port — Blinking Amber</span><span class="def-val">STP listening or learning state. Port is transitioning — will resolve to forwarding (green) or blocking (solid amber).</span>
+          <span class="def-term">Port — Off</span><span class="def-val">No link. Nothing connected, cable fault, or port administratively shut down.</span>
+          <span class="def-term">Cisco Mode Button</span><span class="def-val">STAT/DUPLX/SPEED button changes what port LEDs display. STAT = link/activity (default). SPEED = port speed. DUPLX = duplex. Confirm which mode is active before interpreting LEDs.</span>
+        </div>
+        <div class="callout callout-mil">Reading LEDs is like reading your vehicle dashboard on patrol. Green = good to go. Amber = something needs attention but you're not dead in the water. No light = no power or no connection — start there. Blinking vs solid and green vs amber tells you exactly what's wrong before you open a single log file.</div>
+
+      </div>
+
     </div>
   </section>
 
