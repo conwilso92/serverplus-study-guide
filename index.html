@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CompTIA Server+ SK0-005 Study Guide v2</title>
+<title>CompTIA Server+ SK0-005 Study Guide v2.1</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@300;400;600;700;900&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -183,13 +183,13 @@
 
 <header class="site-header">
   <div class="header-badge">SK0-005 CERTIFICATION PREP</div>
-  <h1>CompTIA <span>Server+</span> Study Guide <span class="v2-badge">v2</span></h1>
-  <p class="subtitle">SYNTHESIZED FROM STAR V LEARNING CENTERS · PROF. DON LAFOND · GAPS FILLED FROM EXAM OBJECTIVES</p>
+  <h1>CompTIA <span>Server+</span> Study Guide <span class="v2-badge">v2.1</span></h1>
+  <p class="subtitle">SYNTHESIZED FROM STAR V LEARNING CENTERS · PROF. DON LAFOND · CERTMASTER TEXTBOOK · ALL GAPS PATCHED</p>
   <div class="header-stats">
     <span class="stat-pill"><strong>12</strong> Chapters</span>
     <span class="stat-pill"><strong>5</strong> Exam Domains</span>
     <span class="stat-pill">SK0-005 <strong>Complete</strong></span>
-    <span class="stat-pill">v2: <strong>All Gaps Patched</strong></span>
+    <span class="stat-pill">v2.1: <strong>CertMaster Patched</strong></span>
   </div>
 </header>
 
@@ -243,7 +243,7 @@
           <span class="def-term">2U Server</span><span class="def-val">3.5" tall. 350–400W. Dual-socket. Room for more drives and expansion cards.</span>
           <span class="def-term">4U Server</span><span class="def-val">7" tall. 600–1000W. Quad-socket. Maximum expandability.</span>
           <span class="def-term">Tower Server</span><span class="def-val">Standalone upright unit. Like a desktop but server-grade. Not rack-mounted. Good for small offices.</span>
-          <span class="def-term">Blade Server</span><span class="def-val">Thin modules that slide into a chassis. Chassis handles shared power, cooling, and networking. Avg chassis = 4500W; ~320W per blade (14-blade chassis).</span>
+          <span class="def-term">Blade Server</span><span class="def-val">Thin modules that slide into a chassis. Chassis handles shared power, cooling, and networking. Avg chassis = 4500W; ~320W per blade (14-blade chassis). Blades are hot-swappable. Efficiency advantage: 10 blades in one enclosure share 2 PSUs vs. 10 standalone servers needing 20 individual PSUs — less heat, less power, less space. Ideal for web servers, virtualization hosts, and clustering.</span>
         </div>
         <div class="callout callout-exam">A 1U = 1.75". A 4U = 7". Rack math: a 42U rack can hold 42 × 1U servers, or 21 × 2U servers, etc. This shows up in scenario questions.</div>
       </div>
@@ -253,10 +253,13 @@
         <ul class="concept-list">
           <li><strong>Baffle</strong> — Inside the chassis. Channels airflow from intake to specific components.</li>
           <li><strong>Shroud</strong> — Outside the chassis or around a component. Directs air externally.</li>
-          <li><strong>Hot Aisle / Cold Aisle</strong> — Data center airflow design. Cold air enters from front of racks (cold aisle), hot air exits from rear (hot aisle). Racks face each other front-to-front and back-to-back.</li>
+          <li><strong>Hot Aisle / Cold Aisle</strong> — Data center airflow design. Racks oriented so fronts face each other (cold aisle) and backs face each other (hot aisle). Cold air drawn in from front, hot air exhausted from rear. Prevents recirculation of hot air.</li>
+          <li><strong>CRAC Unit (Computer Room Air Conditioning)</strong> — Purpose-built AC for server rooms. Sizing formula: <strong>IT load (watts) × 1.3 = BTU rating required</strong>. IT load = total power consumption of all devices. Size generously — includes body heat from administrators.</li>
+          <li><strong>Environmental Sensors</strong> — Temperature, humidity, water detection, door closure, airflow. Communicate via SMTP or proprietary interfaces. Alert before downtime occurs.</li>
           <li><strong>Liquid Cooling</strong> — For high-density, high-heat workloads. More efficient than air for extreme heat loads.</li>
           <li><strong>PUE (Power Usage Effectiveness)</strong> — Total facility power ÷ IT equipment power. PUE of 1.0 = perfect. Google averages ~1.1. A PUE of 3 means the datacenter uses 3× what the servers alone need.</li>
         </ul>
+        <div class="callout callout-exam">CRAC sizing: IT load × 1.3 = BTU needed. Target temp: 68–71°F. Max range: 50–82°F. Target humidity: 40–60% rH. These exact numbers come from the CertMaster textbook and are exam-testable.</div>
       </div>
 
       <div class="section-block">
@@ -383,7 +386,7 @@
       <div class="section-block">
         <div class="section-title">Converged Network Adapters (CNA)</div>
         <p>A CNA combines a standard NIC and a Fibre Channel HBA (Host Bus Adapter) into a single card. It can carry both standard Ethernet traffic AND Fibre Channel storage traffic on the same physical adapter and cable — enabling FCoE. Reduces the number of cards needed and simplifies cabling in converged infrastructure.</p>
-        <div class="callout callout-new">Key point: CNA = NIC + HBA in one card. Used specifically with FCoE to converge storage and network traffic onto a single adapter.</div>
+        <div class="callout callout-new">CNAs were a slide that extracted blank in v1. Key point: CNA = NIC + HBA in one card. Used specifically with FCoE to converge storage and network traffic onto a single adapter.</div>
       </div>
 
       <div class="section-block">
@@ -445,7 +448,7 @@
           <span class="def-term">ZFS</span><span class="def-val">Zettabyte File System. Open source (originally Sun). Max file: 16EB. Max volume: 256ZB. Built-in RAID (RAIDZ), snapshots, checksumming, deduplication. Used in TrueNAS.</span>
           <span class="def-term">VMFS</span><span class="def-val">VMware File System. Used exclusively by VMware vSphere/ESXi for datastore volumes. Max 64TB. Optimized for concurrent VM I/O.</span>
         </div>
-        <div class="callout callout-mil">RAIDZ1 = RAID5 equivalent, snapshots are instant, and ZFS self-heals bit rot by comparing data against checksums. That homelab experience directly maps to enterprise ZFS deployments.</div>
+        <div class="callout callout-mil">Your TrueNAS runs ZFS — you already know RAIDZ1 = RAID5 equivalent, snapshots are instant, and ZFS self-heals bit rot by comparing data against checksums. That homelab experience directly maps to enterprise ZFS deployments.</div>
       </div>
 
       <div class="section-block">
@@ -507,16 +510,47 @@
       </div>
 
       <div class="section-block">
-        <div class="section-title">Cloud Models</div>
+        <div class="section-title">Container-Based Virtualization</div>
         <div class="def-grid">
-          <span class="def-term">IaaS</span><span class="def-val">Infrastructure as a Service. You manage OS and up. Provider manages hardware, networking, virtualization. Example: AWS EC2, Azure VMs.</span>
-          <span class="def-term">PaaS</span><span class="def-val">Platform as a Service. Provider manages OS and runtime. You manage application and data. Example: Azure App Service, Google App Engine.</span>
-          <span class="def-term">SaaS</span><span class="def-val">Software as a Service. Provider manages everything. You just use the app. Example: Office 365, Salesforce.</span>
-          <span class="def-term">Public Cloud</span><span class="def-val">Resources shared among multiple tenants. Owned and operated by provider. Cheapest, least control.</span>
+          <span class="def-term">Container</span><span class="def-val">Lightweight virtualization at the OS level rather than hardware level. Containers share the host OS kernel — no separate guest OS per container. Much faster to start and more resource-efficient than VMs.</span>
+          <span class="def-term">Container vs VM</span><span class="def-val">VM = full OS per guest (higher overhead, stronger isolation). Container = shared kernel (lower overhead, faster, less isolation). VMs are better for security isolation; containers are better for scalability and speed.</span>
+          <span class="def-term">Docker</span><span class="def-val">Most common container platform. Packages applications with all dependencies into a portable image. Runs on Linux or Windows.</span>
+          <span class="def-term">Kubernetes (K8s)</span><span class="def-val">Container orchestration platform. Manages deployment, scaling, and failover of containers across multiple hosts.</span>
+          <span class="def-term">Container Image</span><span class="def-val">Read-only template used to create containers. Stored in a registry (Docker Hub). Images are layered — each layer adds changes on top of the previous.</span>
+        </div>
+        <div class="callout callout-exam">Containers = OS-level virtualization (shared kernel). VMs = hardware-level virtualization (separate OS per guest). The exam may call containers "application virtualization" or reference Docker/container-based deployments as a "hybrid" virtualization approach.</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Cloud Models</div>
+        <p class="mini-h">NIST 5 Characteristics of Cloud Computing</p>
+        <div class="def-grid">
+          <span class="def-term">On-Demand Self-Service</span><span class="def-val">Resources provisioned by the consumer without involving the CSP. No phone calls, no wait.</span>
+          <span class="def-term">Broad Network Access</span><span class="def-val">Services available over the network from any standard device (phone, tablet, laptop, server).</span>
+          <span class="def-term">Resource Pooling</span><span class="def-val">Compute resources pooled and dynamically allocated across multiple tenants. Multi-tenant model.</span>
+          <span class="def-term">Rapid Elasticity</span><span class="def-val">Resources scale up and down on demand. Consumers pay for what they use at any given time.</span>
+          <span class="def-term">Measured Service</span><span class="def-val">Resource utilization monitored, controlled, and billed based on actual use. Pay-as-you-go.</span>
+        </div>
+        <div class="callout callout-exam">CompTIA expects you to name all five NIST cloud characteristics. Mnemonic: <strong>O-B-R-R-M</strong> — On-demand, Broad access, Resource pooling, Rapid elasticity, Measured service.</div>
+        <p class="mini-h">Deployment Models</p>
+        <div class="def-grid">
+          <span class="def-term">Public Cloud</span><span class="def-val">Resources shared among multiple tenants. Owned and operated by CSP (AWS, Azure, GCP). Cheapest, least control.</span>
           <span class="def-term">Private Cloud</span><span class="def-val">Dedicated to one organization. On-premises or hosted. Most control, highest cost.</span>
           <span class="def-term">Hybrid Cloud</span><span class="def-val">Mix of public and private. Sensitive workloads stay private, scalable workloads burst to public.</span>
-          <span class="def-term">Community Cloud</span><span class="def-val">Shared by organizations with common concerns (government, healthcare). Managed by one or more members or a provider.</span>
+          <span class="def-term">Community Cloud</span><span class="def-val">Shared by organizations with common concerns (government, healthcare, finance). Managed by members or a provider.</span>
         </div>
+        <p class="mini-h">Service Models</p>
+        <div class="def-grid">
+          <span class="def-term">IaaS</span><span class="def-val">Infrastructure as a Service. You manage OS and up. Provider manages hardware, networking, virtualization. Target audience: sysadmins. Example: AWS EC2, Azure VMs.</span>
+          <span class="def-term">PaaS</span><span class="def-val">Platform as a Service. Provider manages OS and runtime. You manage application and data. Target audience: developers, DBAs. Example: Azure App Service, Google App Engine.</span>
+          <span class="def-term">SaaS</span><span class="def-val">Software as a Service. Provider manages everything. You just use the app. Target audience: end users. Example: Office 365, Salesforce, Netflix.</span>
+        </div>
+        <p class="mini-h">Shared Security Model</p>
+        <div class="def-grid">
+          <span class="def-term">CSP Responsibility</span><span class="def-val">Security <em>of</em> the cloud. Physical data center security, hardware availability, hypervisor security. The CSP owns and protects the infrastructure.</span>
+          <span class="def-term">Customer Responsibility</span><span class="def-val">Security <em>in</em> the cloud. Data security, access management, OS patching (in IaaS), application security. You own and protect your data and configs.</span>
+        </div>
+        <div class="callout callout-exam">Shared security model: CSP secures the cloud infrastructure. YOU secure your data and workloads inside it. This line shifts depending on IaaS vs PaaS vs SaaS — the more managed the service, the more the CSP takes on.</div>
       </div>
 
       <div class="section-block">
@@ -644,7 +678,7 @@
             <tr><td><span class="hl-blue">JBOD</span></td><td>Just a Bunch of Disks</td><td>1</td><td>0 (100% usable)</td><td><span class="bad">None</span></td><td>Normal</td><td>Flexible pooling, no redundancy</td></tr>
           </tbody>
         </table>
-        <div class="callout callout-exam">Capacity math: RAID 5 = (N−1) × drive size. RAID 6 = (N−2) × drive size. RAID 10 = (N/2) × drive size. Example: RAID 6 with 4×250GB = (4−2)×250 = 500GB usable. My TrueNAS RAIDZ1 (3×20TB) ≈ RAID 5: (3−1)×20TB = 40TB usable.</div>
+        <div class="callout callout-exam">Capacity math: RAID 5 = (N−1) × drive size. RAID 6 = (N−2) × drive size. RAID 10 = (N/2) × drive size. Example: RAID 6 with 4×250GB = (4−2)×250 = 500GB usable. Your TrueNAS RAIDZ1 (3×20TB) ≈ RAID 5: (3−1)×20TB = 40TB usable.</div>
       </div>
 
       <div class="section-block">
@@ -691,7 +725,7 @@
         <div class="section-title">Shared Storage Types</div>
         <div class="def-grid">
           <span class="def-term">DAS</span><span class="def-val">Direct Attached Storage. Connected to one server (USB, SATA, SAS). Not shared. Simple, fast, cheap. Cannot be accessed by other servers.</span>
-          <span class="def-term">NAS</span><span class="def-val">Network Attached Storage. File-level storage over the network. Multiple servers access simultaneously. Uses NFS (Linux/Unix) or CIFS/SMB (Windows).</span>
+          <span class="def-term">NAS</span><span class="def-val">Network Attached Storage. File-level storage over the network. Multiple servers access simultaneously. Uses NFS (Linux/Unix) or CIFS/SMB (Windows). Your TrueNAS = NAS.</span>
           <span class="def-term">SAN</span><span class="def-val">Storage Area Network. Block-level access. Server sees storage as a local disk. Uses Fibre Channel or iSCSI. Fastest and most expensive shared storage.</span>
           <span class="def-term">iSCSI</span><span class="def-val">SCSI commands encapsulated in IP packets. SAN over standard Ethernet. Cost-effective alternative to Fibre Channel. Uses existing network infrastructure.</span>
           <span class="def-term">Fibre Channel (FC)</span><span class="def-val">Dedicated high-speed storage network. 8/16/32 Gbps. Requires separate FC switches (not Ethernet). Lowest latency, highest cost.</span>
@@ -705,13 +739,17 @@
       <div class="section-block">
         <div class="section-title">Asset Management</div>
         <div class="def-grid">
-          <span class="def-term">Inventory Fields</span><span class="def-val">Make, Model, Serial Number, Asset Tag. Track all of these for every piece of hardware.</span>
-          <span class="def-term">Lifecycle Stages</span><span class="def-val">Procurement → Usage → EOL (End of Life) → Disposal/Recycling. EOL = no more vendor support or patches. Plan replacement before EOL.</span>
-          <span class="def-term">Capital Lease</span><span class="def-val">You own the asset at end of lease term. Appears on balance sheet as an asset. Usually better long-term.</span>
-          <span class="def-term">Operating Lease</span><span class="def-val">You return the asset. Treated as an ongoing expense. Easier to upgrade hardware regularly.</span>
+          <span class="def-term">Inventory Fields</span><span class="def-val">Make, Model, Serial Number, Asset Tag, BIOS asset tag. Track all of these for every piece of hardware. The BIOS asset tag survives OS reinstalls.</span>
+          <span class="def-term">Lifecycle Stages</span><span class="def-val">Procurement → Usage → EOL (End of Life) → Disposal/Recycling. Server hardware useful life: typically <strong>3–7 years</strong>. EOL = no more vendor support or patches. Plan replacement before EOL.</span>
+          <span class="def-term">Procurement</span><span class="def-val">Define specs based on role → RFP process → pricing/contract → finalization/shipping. Security requirements (MFA, encryption, patching) should be built into the RFP.</span>
+          <span class="def-term">Capital Lease</span><span class="def-val">You own the asset at end of lease term. Appears on balance sheet as an asset. Tax depreciation benefits.</span>
+          <span class="def-term">Operating Lease</span><span class="def-val">You return the asset. Treated as ongoing expense (OpEx). Predictable monthly payments. Protection against hardware obsolescence.</span>
+          <span class="def-term">Warranty</span><span class="def-val">Covers manufacturer defects. Document warranty details during procurement. Know how to escalate to vendor quickly.</span>
+          <span class="def-term">Service Plan Tiers</span><span class="def-val">Common tiers: (1) On-site, 4-hour response same business day. (2) On-site, same business day. (3) On-site, next business day. Higher tier = higher cost = lower RTO.</span>
           <span class="def-term">Labeling</span><span class="def-val">Port labels, system labels, circuit labels, patch panel labels. Everything labeled = faster troubleshooting.</span>
           <span class="def-term">Change Management</span><span class="def-val">Formal process: Request → Review → Approve → Implement → Document. No unauthorized changes. Every change documented including rollback plan.</span>
         </div>
+        <div class="callout callout-exam">Server useful life = 3–7 years. Windows Server OS support lifecycle = ~12 years after initial release. A server may reach EOL before the OS does — evaluate hardware capability, driver support, and vendor support together.</div>
       </div>
 
     </div>
@@ -823,8 +861,9 @@
             </ul>
             <p class="mini-h">HVAC</p>
             <ul class="concept-list">
-              <li>Data centers target 65–80°F (18–27°C) and 40–60% relative humidity.</li>
-              <li>Too hot = component failure. Too humid = corrosion/condensation. Too dry = ESD risk.</li>
+              <li><strong>Target temperature:</strong> 68–71°F (20–22°C). Maximum range: 50–82°F (10–28°C).</li>
+              <li><strong>Target humidity:</strong> 40–60% relative humidity (rH). Too dry = ESD risk. Too humid = corrosion/condensation.</li>
+              <li><strong>CRAC Unit Sizing:</strong> Computer Room Air Conditioning. Size formula: <strong>IT load (watts) × 1.3 = BTU rating needed</strong>. IT load = total power draw of all devices in the room. Size for the load including administrator body heat.</li>
             </ul>
           </div>
         </div>
