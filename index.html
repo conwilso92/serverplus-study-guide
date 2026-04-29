@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CompTIA Server+ SK0-005 Study Guide v3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@300;400;600;700;900&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0d12;
+    --bg2: #0f1318;
+    --bg3: #151b24;
+    --bg4: #1a2230;
+    --border: #1e2d40;
+    --border-bright: #2a4060;
+    --text: #c8d8e8;
+    --text-dim: #6a8aaa;
+    --text-bright: #e8f4ff;
+    --accent: #00b4ff;
+    --accent2: #00e5a0;
+    --accent3: #ff6b35;
+    --accent4: #ffd700;
+    --accent5: #b060ff;
+    --red: #ff4466;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--text); font-family:'IBM Plex Sans',sans-serif; font-size:15px; line-height:1.7; }
+
+  body::before {
+    content:''; position:fixed; inset:0;
+    background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,180,255,0.012) 2px,rgba(0,180,255,0.012) 4px);
+    pointer-events:none; z-index:1000;
+  }
+
+  /* HEADER */
+  .site-header {
+    background:linear-gradient(135deg,#060b10 0%,#0a1520 50%,#060b10 100%);
+    border-bottom:1px solid var(--border-bright);
+    padding:3rem 2rem 2.5rem; text-align:center; position:relative; overflow:hidden;
+  }
+  .site-header::before {
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(0,180,255,0.08) 0%,transparent 70%);
+  }
+  .header-badge {
+    display:inline-block; font-family:'Share Tech Mono',monospace; font-size:0.7rem;
+    letter-spacing:0.2em; color:var(--accent); background:rgba(0,180,255,0.08);
+    border:1px solid rgba(0,180,255,0.3); padding:0.3rem 1rem; border-radius:2px; margin-bottom:1.2rem;
+  }
+  .v2-badge {
+    display:inline-block; font-family:'Share Tech Mono',monospace; font-size:0.65rem;
+    letter-spacing:0.15em; color:var(--accent2); background:rgba(0,229,160,0.08);
+    border:1px solid rgba(0,229,160,0.3); padding:0.2rem 0.7rem; border-radius:2px;
+    margin-left:0.6rem; vertical-align:middle;
+  }
+  .site-header h1 {
+    font-family:'Exo 2',sans-serif; font-weight:900; font-size:clamp(2rem,5vw,3.5rem);
+    color:var(--text-bright); letter-spacing:-0.02em; line-height:1.1; margin-bottom:0.5rem; position:relative;
+  }
+  .site-header h1 span { color:var(--accent); text-shadow:0 0 30px rgba(0,180,255,0.4); }
+  .site-header .subtitle { font-family:'Share Tech Mono',monospace; color:var(--text-dim); font-size:0.85rem; letter-spacing:0.12em; margin-bottom:2rem; }
+  .header-stats { display:flex; justify-content:center; gap:2rem; flex-wrap:wrap; }
+  .stat-pill { font-family:'Share Tech Mono',monospace; font-size:0.75rem; color:var(--text-dim); border:1px solid var(--border); padding:0.35rem 0.9rem; border-radius:20px; background:rgba(255,255,255,0.02); }
+  .stat-pill strong { color:var(--accent2); }
+
+  /* LAYOUT */
+  .container { max-width:1100px; margin:0 auto; padding:2rem 1.5rem; }
+
+  /* TOC */
+  .toc-nav { background:var(--bg2); border:1px solid var(--border); border-radius:4px; padding:1.5rem; margin-bottom:2.5rem; }
+  .toc-nav h2 { font-family:'Share Tech Mono',monospace; font-size:0.7rem; letter-spacing:0.2em; color:var(--accent); text-transform:uppercase; margin-bottom:1rem; }
+  .toc-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:0.4rem; }
+  .toc-item { display:flex; align-items:center; gap:0.6rem; padding:0.45rem 0.7rem; border-radius:3px; text-decoration:none; color:var(--text-dim); font-size:0.82rem; transition:all 0.15s; border:1px solid transparent; }
+  .toc-item:hover { color:var(--text-bright); background:rgba(0,180,255,0.06); border-color:var(--border); }
+  .toc-num { font-family:'Share Tech Mono',monospace; font-size:0.65rem; color:var(--accent); min-width:1.8rem; }
+
+  /* DOMAIN WEIGHTS */
+  .domain-weights { background:var(--bg2); border:1px solid var(--border); border-radius:4px; padding:1.5rem; margin-bottom:2.5rem; }
+  .domain-weights h2 { font-family:'Share Tech Mono',monospace; font-size:0.7rem; letter-spacing:0.2em; color:var(--accent); margin-bottom:1.2rem; }
+  .weight-row { display:flex; align-items:center; gap:1rem; margin-bottom:0.7rem; font-size:0.8rem; }
+  .weight-label { min-width:200px; color:var(--text-dim); }
+  .weight-bar-bg { flex:1; height:6px; background:var(--bg4); border-radius:3px; overflow:hidden; }
+  .weight-bar { height:100%; border-radius:3px; }
+  .weight-pct { font-family:'Share Tech Mono',monospace; font-size:0.75rem; min-width:2.5rem; text-align:right; }
+
+  /* CHAPTERS */
+  .chapter { background:var(--bg2); border:1px solid var(--border); border-radius:4px; margin-bottom:2rem; overflow:hidden; }
+  .chapter-header { display:flex; align-items:center; gap:1.2rem; padding:1.2rem 1.5rem; border-bottom:1px solid var(--border); background:var(--bg3); }
+  .chapter-num { font-family:'Share Tech Mono',monospace; font-size:0.65rem; letter-spacing:0.15em; color:var(--accent); background:rgba(0,180,255,0.08); border:1px solid rgba(0,180,255,0.2); padding:0.25rem 0.6rem; border-radius:2px; white-space:nowrap; }
+  .chapter-title { font-family:'Exo 2',sans-serif; font-weight:700; font-size:1.1rem; color:var(--text-bright); flex:1; }
+  .chapter-obj { font-family:'Share Tech Mono',monospace; font-size:0.65rem; color:var(--text-dim); background:var(--bg4); border:1px solid var(--border); padding:0.2rem 0.6rem; border-radius:2px; white-space:nowrap; }
+  .chapter-body { padding:1.5rem; }
+
+  /* SECTION */
+  .section-block { margin-bottom:1.5rem; }
+  .section-block:last-child { margin-bottom:0; }
+  .section-title { font-family:'Exo 2',sans-serif; font-weight:600; font-size:0.8rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent2); margin-bottom:0.7rem; padding-bottom:0.4rem; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:0.5rem; }
+  .section-title::before { content:'▸'; color:var(--accent); font-size:0.65rem; }
+
+  /* DEF GRID */
+  .def-grid { display:grid; grid-template-columns:minmax(160px,auto) 1fr; gap:0 1.2rem; font-size:0.83rem; }
+  .def-term { font-family:'Share Tech Mono',monospace; color:var(--accent4); padding:0.35rem 0; border-bottom:1px solid rgba(255,255,255,0.04); align-self:start; }
+  .def-val { color:var(--text); padding:0.35rem 0; border-bottom:1px solid rgba(255,255,255,0.04); line-height:1.5; }
+
+  /* TABLES */
+  .data-table { width:100%; border-collapse:collapse; font-size:0.8rem; margin-top:0.5rem; }
+  .data-table th { font-family:'Share Tech Mono',monospace; font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); background:var(--bg4); padding:0.6rem 0.8rem; text-align:left; border:1px solid var(--border); }
+  .data-table td { padding:0.5rem 0.8rem; border:1px solid var(--border); vertical-align:top; color:var(--text); }
+  .data-table tr:nth-child(even) td { background:rgba(255,255,255,0.02); }
+  .data-table tr:hover td { background:rgba(0,180,255,0.04); }
+  .hl-blue { font-family:'Share Tech Mono',monospace; color:var(--accent); font-weight:bold; }
+  .hl-gold { font-family:'Share Tech Mono',monospace; color:var(--accent4); font-weight:bold; }
+  .good { color:var(--accent2); }
+  .bad { color:var(--red); }
+  .neutral { color:var(--text-dim); }
+
+  /* PORT GRID */
+  .port-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:0.35rem; }
+  .port-item { display:flex; align-items:center; gap:0.7rem; padding:0.4rem 0.7rem; background:var(--bg3); border:1px solid var(--border); border-radius:3px; font-size:0.8rem; }
+  .port-num { font-family:'Share Tech Mono',monospace; color:var(--accent); min-width:3.5rem; font-size:0.78rem; }
+  .port-name { color:var(--text); flex:1; }
+  .port-abbr { font-family:'Share Tech Mono',monospace; color:var(--text-dim); font-size:0.72rem; }
+
+  /* CALLOUTS */
+  .callout { border-left:3px solid; padding:0.8rem 1rem; border-radius:0 3px 3px 0; font-size:0.82rem; margin:0.8rem 0; line-height:1.55; }
+  .callout-exam { border-color:var(--accent4); background:rgba(255,215,0,0.05); color:var(--text); }
+  .callout-exam::before { content:'★ EXAM TIP  '; font-family:'Share Tech Mono',monospace; font-size:0.65rem; letter-spacing:0.1em; color:var(--accent4); display:block; margin-bottom:0.35rem; }
+  .callout-warning { border-color:var(--accent3); background:rgba(255,107,53,0.05); color:var(--text); }
+  .callout-warning::before { content:'⚠ CRITICAL  '; font-family:'Share Tech Mono',monospace; font-size:0.65rem; letter-spacing:0.1em; color:var(--accent3); display:block; margin-bottom:0.35rem; }
+  .callout-mil { border-color:var(--accent5); background:rgba(176,96,255,0.05); color:var(--text); }
+  .callout-mil::before { content:'⬡ ANALOGY  '; font-family:'Share Tech Mono',monospace; font-size:0.65rem; letter-spacing:0.1em; color:var(--accent5); display:block; margin-bottom:0.35rem; }
+  .callout-new { border-color:var(--accent2); background:rgba(0,229,160,0.05); color:var(--text); }
+  .callout-new::before { content:'+ ADDED IN V2  '; font-family:'Share Tech Mono',monospace; font-size:0.65rem; letter-spacing:0.1em; color:var(--accent2); display:block; margin-bottom:0.35rem; }
+
+  /* LISTS */
+  .concept-list { list-style:none; font-size:0.83rem; }
+  .concept-list li { padding:0.25rem 0 0.25rem 1.2rem; position:relative; color:var(--text); border-bottom:1px solid rgba(255,255,255,0.03); }
+  .concept-list li::before { content:'›'; position:absolute; left:0; color:var(--accent); font-family:'Share Tech Mono',monospace; }
+  .concept-list li strong { color:var(--text-bright); font-weight:600; }
+  .concept-list li code { font-family:'Share Tech Mono',monospace; background:var(--bg4); border:1px solid var(--border); padding:0.05rem 0.35rem; border-radius:2px; font-size:0.8em; color:var(--accent2); }
+
+  /* TWO-COL */
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; }
+  .three-col { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem; }
+
+  /* TAGS */
+  .tag-row { display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:0.4rem; }
+  .tag { font-family:'Share Tech Mono',monospace; font-size:0.7rem; padding:0.2rem 0.55rem; border-radius:2px; border:1px solid; }
+  .tag-blue { color:var(--accent); border-color:rgba(0,180,255,0.3); background:rgba(0,180,255,0.06); }
+  .tag-green { color:var(--accent2); border-color:rgba(0,229,160,0.3); background:rgba(0,229,160,0.06); }
+  .tag-orange { color:var(--accent3); border-color:rgba(255,107,53,0.3); background:rgba(255,107,53,0.06); }
+  .tag-gold { color:var(--accent4); border-color:rgba(255,215,0,0.3); background:rgba(255,215,0,0.06); }
+  .tag-purple { color:var(--accent5); border-color:rgba(176,96,255,0.3); background:rgba(176,96,255,0.06); }
+
+  /* TS STEPS */
+  .ts-steps { counter-reset:ts; }
+  .ts-step { display:flex; gap:1rem; padding:0.6rem 0; border-bottom:1px solid rgba(255,255,255,0.04); font-size:0.83rem; align-items:flex-start; }
+  .ts-step::before { counter-increment:ts; content:counter(ts); font-family:'Share Tech Mono',monospace; font-size:0.7rem; color:var(--accent); background:rgba(0,180,255,0.1); border:1px solid rgba(0,180,255,0.25); width:1.6rem; height:1.6rem; border-radius:2px; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:0.1rem; }
+
+  /* MINI HEADER */
+  .mini-h { font-family:'Share Tech Mono',monospace; font-size:0.72rem; color:var(--text-dim); letter-spacing:0.12em; text-transform:uppercase; margin:0.8rem 0 0.4rem; }
+
+  /* FOOTER */
+  .site-footer { text-align:center; padding:2rem; border-top:1px solid var(--border); font-family:'Share Tech Mono',monospace; font-size:0.7rem; color:var(--text-dim); letter-spacing:0.1em; margin-top:2rem; }
+
+  [id] { scroll-margin-top:1rem; }
+  p { font-size:0.83rem; color:var(--text); margin-bottom:0.6rem; }
+  .new-badge { font-family:'Share Tech Mono',monospace; font-size:0.6rem; color:var(--accent2); border:1px solid rgba(0,229,160,0.3); padding:0.1rem 0.4rem; border-radius:2px; margin-left:0.5rem; vertical-align:middle; }
+
+  @media(max-width:640px){
+    .two-col,.three-col{grid-template-columns:1fr;}
+    .header-stats{gap:0.8rem;}
+    .toc-grid{grid-template-columns:1fr;}
+    .port-grid{grid-template-columns:1fr;}
+    .def-grid{grid-template-columns:1fr; gap:0;}
+    .def-term{border-bottom:none; padding-bottom:0; color:var(--accent4); font-size:0.75rem;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-badge">SK0-005 CERTIFICATION PREP</div>
+  <h1>CompTIA <span>Server+</span> Study Guide <span class="v2-badge">v2.1</span></h1>
+  <p class="subtitle">SYNTHESIZED FROM STAR V LEARNING CENTERS · PROF. DON LAFOND · CERTMASTER TEXTBOOK · ALL GAPS PATCHED</p>
+  <div class="header-stats">
+    <span class="stat-pill"><strong>12</strong> Chapters</span>
+    <span class="stat-pill"><strong>5</strong> Exam Domains</span>
+    <span class="stat-pill">SK0-005 <strong>Complete</strong></span>
+    <span class="stat-pill">v3 <strong>All Class Slides Integrated</strong></span>
+  </div>
+</header>
+
+<div class="container">
+
+  <nav class="toc-nav">
+    <h2>// Table of Contents</h2>
+    <div class="toc-grid">
+      <a class="toc-item" href="#ch1"><span class="toc-num">CH.01</span> Server Hardware</a>
+      <a class="toc-item" href="#ch2"><span class="toc-num">CH.02</span> Installing & Configuring Servers</a>
+      <a class="toc-item" href="#ch3"><span class="toc-num">CH.03</span> Server Maintenance</a>
+      <a class="toc-item" href="#ch4"><span class="toc-num">CH.04</span> Storage Technologies & Asset Mgmt</a>
+      <a class="toc-item" href="#ch5"><span class="toc-num">CH.05</span> Fault Tolerance Requirements</a>
+      <a class="toc-item" href="#ch6"><span class="toc-num">CH.06</span> Securing the Server</a>
+      <a class="toc-item" href="#ch7"><span class="toc-num">CH.07</span> Securing Server Data & Network Access</a>
+      <a class="toc-item" href="#ch8"><span class="toc-num">CH.08</span> Networking & Scripting</a>
+      <a class="toc-item" href="#ch9"><span class="toc-num">CH.09</span> Disaster Recovery</a>
+      <a class="toc-item" href="#ch10"><span class="toc-num">CH.10</span> Troubleshooting Hardware & Software</a>
+      <a class="toc-item" href="#ch11"><span class="toc-num">CH.11</span> Network Connectivity & Security Issues</a>
+      <a class="toc-item" href="#ch12"><span class="toc-num">CH.12</span> Troubleshooting Storage Issues</a>
+    </div>
+  </nav>
+
+  <div class="domain-weights">
+    <h2>// Exam Domain Weights (SK0-005)</h2>
+    <div class="weight-row"><span class="weight-label">1. Server Hardware</span><div class="weight-bar-bg"><div class="weight-bar" style="width:16%;background:var(--accent)"></div></div><span class="weight-pct" style="color:var(--accent)">16%</span></div>
+    <div class="weight-row"><span class="weight-label">2. Server Administration</span><div class="weight-bar-bg"><div class="weight-bar" style="width:28%;background:var(--accent2)"></div></div><span class="weight-pct" style="color:var(--accent2)">28%</span></div>
+    <div class="weight-row"><span class="weight-label">3. Security</span><div class="weight-bar-bg"><div class="weight-bar" style="width:20%;background:var(--accent4)"></div></div><span class="weight-pct" style="color:var(--accent4)">20%</span></div>
+    <div class="weight-row"><span class="weight-label">4. Networking</span><div class="weight-bar-bg"><div class="weight-bar" style="width:17%;background:var(--accent3)"></div></div><span class="weight-pct" style="color:var(--accent3)">17%</span></div>
+    <div class="weight-row"><span class="weight-label">5. Disaster Recovery</span><div class="weight-bar-bg"><div class="weight-bar" style="width:19%;background:var(--accent5)"></div></div><span class="weight-pct" style="color:var(--accent5)">19%</span></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       CH 1 – SERVER HARDWARE
+  ═══════════════════════════════════════ -->
+  <section class="chapter" id="ch1">
+    <div class="chapter-header">
+      <span class="chapter-num">CH 01</span>
+      <h2 class="chapter-title">Server Hardware</h2>
+      <span class="chapter-obj">Obj 1.1</span>
+    </div>
+    <div class="chapter-body">
+
+      <div class="section-block">
+        <div class="section-title">Racking & Enclosures</div>
+        <div class="def-grid">
+          <span class="def-term">U (Unit)</span><span class="def-val">Standard rack height unit = <strong>1.75 inches (44.45mm)</strong>. Answer to any "unit of rack measurement" question — the answer is always U, not RU or HU.</span>
+          <span class="def-term">Rack Widths</span><span class="def-val">19-inch and 23-inch are the two standard widths. 19" is by far most common.</span>
+          <span class="def-term">Common Sizes</span><span class="def-val">24U, 42U (data center standard), 48U enclosures.</span>
+          <span class="def-term">1U Server</span><span class="def-val">1.75" tall. 300–350W power draw. Dense, space-efficient. No optical drive bays.</span>
+          <span class="def-term">2U Server</span><span class="def-val">3.5" tall. 350–400W. Dual-socket. Room for more drives and expansion cards.</span>
+          <span class="def-term">4U Server</span><span class="def-val">7" tall. 600–1000W. Quad-socket. Maximum expandability.</span>
+          <span class="def-term">Tower Server</span><span class="def-val">Standalone upright unit. Like a desktop but server-grade. Not rack-mounted. Good for small offices.</span>
+          <span class="def-term">Blade Server</span><span class="def-val">Thin modules that slide into a chassis. Chassis handles shared power, cooling, and networking. Avg chassis = 4500W; ~320W per blade (14-blade chassis). Blades are hot-swappable. Efficiency advantage: 10 blades in one enclosure share 2 PSUs vs. 10 standalone servers needing 20 individual PSUs — less heat, less power, less space. Ideal for web servers, virtualization hosts, and clustering.</span>
+        </div>
+        <div class="callout callout-exam">A 1U = 1.75". A 4U = 7". Rack math: a 42U rack can hold 42 × 1U servers, or 21 × 2U servers, etc. This shows up in scenario questions.</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Cooling Management</div>
+        <ul class="concept-list">
+          <li><strong>Baffle</strong> — Inside the chassis. Channels airflow from intake to specific components.</li>
+          <li><strong>Shroud</strong> — Outside the chassis or around a component. Directs air externally.</li>
+          <li><strong>Hot Aisle / Cold Aisle</strong> — Data center airflow design. Racks oriented so fronts face each other (cold aisle) and backs face each other (hot aisle). Cold air drawn in from front, hot air exhausted from rear. Prevents recirculation of hot air.</li>
+          <li><strong>CRAC Unit (Computer Room Air Conditioning)</strong> — Purpose-built AC for server rooms. Sizing formula: <strong>IT load (watts) × 1.3 = BTU rating required</strong>. IT load = total power consumption of all devices. Size generously — includes body heat from administrators.</li>
+          <li><strong>Environmental Sensors</strong> — Temperature, humidity, water detection, door closure, airflow. Communicate via SMTP or proprietary interfaces. Alert before downtime occurs.</li>
+          <li><strong>Liquid Cooling</strong> — For high-density, high-heat workloads. More efficient than air for extreme heat loads.</li>
+          <li><strong>PUE (Power Usage Effectiveness)</strong> — Total facility power ÷ IT equipment power. PUE of 1.0 = perfect. Google averages ~1.1. A PUE of 3 means the datacenter uses 3× what the servers alone need.</li>
+        </ul>
+        <div class="callout callout-exam">CRAC sizing: IT load × 1.3 = BTU needed. Target temp: 68–71°F. Max range: 50–82°F. Target humidity: 40–60% rH. These exact numbers come from the CertMaster textbook and are exam-testable.</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Power Systems</div>
+        <div class="def-grid">
+          <span class="def-term">Voltage</span><span class="def-val">Pressure/force of electricity (V). 110V standard US. 220V for higher-load circuits. 48V common in telecom/datacenter.</span>
+          <span class="def-term">Amperage</span><span class="def-val">Volume/quantity of electricity (A).</span>
+          <span class="def-term">Wattage</span><span class="def-val">Volts × Amps = Watts. Total power consumed.</span>
+          <span class="def-term">Volt-Amperes (VA)</span><span class="def-val">Amps × Volts = VA. Total potential draw. Used for UPS and PDU sizing.</span>
+          <span class="def-term">Actual Power</span><span class="def-val">VA × 0.67 = estimated actual power draw. Accounts for power factor.</span>
+          <span class="def-term">kW</span><span class="def-val">Divide watts by 1,000. 350W = 0.35kW.</span>
+          <span class="def-term">PDU</span><span class="def-val">Power Distribution Unit. Conditions, protects, distributes power. NFPA 80% rule: never exceed 80% of rated capacity. 30A PDU → 24A max.</span>
+          <span class="def-term">N+1 Redundancy</span><span class="def-val">Add one extra component beyond what's needed. 2 PSUs needed → install 3. One failure = still operational.</span>
+          <span class="def-term">2N Redundancy</span><span class="def-val">Double everything. 2 PSUs needed → install 4 on two separate circuits. Highest fault tolerance.</span>
+          <span class="def-term">UPS</span><span class="def-val">Uninterruptible Power Supply. Battery backup. Max safe load = VA × 0.8. Provides graceful shutdown time during outages.</span>
+          <span class="def-term">Single-Phase</span><span class="def-val">Standard 110/120V. Home and small office.</span>
+          <span class="def-term">Three-Phase</span><span class="def-val">277/480V (or 120/208V). Data centers. More efficient power delivery at scale.</span>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Power Connectors</div>
+        <div class="def-grid">
+          <span class="def-term">NEMA</span><span class="def-val">National Electrical Manufacturers Association. Sets connector standards in the US.</span>
+          <span class="def-term">Edison</span><span class="def-val">Standard 3-prong grounded or 2-prong ungrounded plug. The outlet in your home.</span>
+          <span class="def-term">Twist-Locking (NEMA L)</span><span class="def-val">Insert and twist to lock. Prevents accidental disconnection. Used in server rooms where vibration or bumping is a risk.</span>
+          <span class="def-term">Midplane/Backplane</span><span class="def-val">Internal connectors inside blade chassis. Blade slides in and connects to backplane for power and data.</span>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Network Cabling — Copper</div>
+        <table class="data-table">
+          <thead><tr><th>Cable</th><th>Max Speed</th><th>Max Distance</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td><span class="hl-gold">CAT5</span></td><td>100 Mbps</td><td>100m</td><td>Legacy. Not recommended for new installs.</td></tr>
+            <tr><td><span class="hl-gold">CAT5e</span></td><td>1 Gbps</td><td>100m</td><td>Most common existing infrastructure.</td></tr>
+            <tr><td><span class="hl-gold">CAT6</span></td><td>10 Gbps</td><td>55m (at 10G) / 100m (at 1G)</td><td>Common modern standard.</td></tr>
+            <tr><td><span class="hl-gold">CAT6a</span></td><td>10 Gbps</td><td>100m</td><td>Augmented CAT6. Full 10G at full distance.</td></tr>
+            <tr><td><span class="hl-gold">CAT7</span></td><td>10 Gbps+</td><td>100m</td><td>Shielded. GG45 or TERA connector.</td></tr>
+          </tbody>
+        </table>
+        <p class="mini-h">Cable Types</p>
+        <div class="def-grid">
+          <span class="def-term">Straight-Through</span><span class="def-val">Pin 1 → Pin 1. PC to switch, PC to router. Different device types. Most common.</span>
+          <span class="def-term">Crossover</span><span class="def-val">Transmit ↔ Receive crossed. PC to PC, switch to switch. Same device types direct connection. (Modern switches use Auto-MDIX so crossover is rarely needed now.)</span>
+          <span class="def-term">Rollover / Console</span><span class="def-val">Pin 1→8, 2→7, etc. (reversed). RJ-45 to DB9/USB adapter. Used to access Cisco device CLI via console port.</span>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Network Cabling — Fiber</div>
+        <div class="two-col">
+          <div>
+            <p class="mini-h">Connectors</p>
+            <ul class="concept-list">
+              <li><strong>LC</strong> — Local Connector. Small form-factor. Most common in modern enterprise. Used with SFP transceivers.</li>
+              <li><strong>SC</strong> — Subscriber Connector. Push/pull square connector. Older standard.</li>
+              <li><strong>ST</strong> — Straight Tip. Bayonet twist-lock. Older, less common now.</li>
+              <li><strong>MT-RJ</strong> — Duplex small connector. Less common.</li>
+            </ul>
+          </div>
+          <div>
+            <p class="mini-h">Fiber Modes</p>
+            <ul class="concept-list">
+              <li><strong>Single-Mode (SMF)</strong> — 8.3µm core. Long distance (km). Laser light source. Yellow jacket. Used for inter-building / WAN.</li>
+              <li><strong>Multimode (MMF)</strong> — 50µm or 62.5µm core. Short distance (meters to ~550m). LED or VCSEL source. Orange or aqua jacket. Used intra-building / data center.</li>
+            </ul>
+          </div>
+        </div>
+        <p class="mini-h">Transceivers</p>
+        <div class="def-grid">
+          <span class="def-term">SFP</span><span class="def-val">Small Form-Factor Pluggable. Hot-swappable. 1 Gbps. Single fiber port.</span>
+          <span class="def-term">SFP+</span><span class="def-val">Enhanced SFP. 10 Gbps. Most common in modern servers and switches.</span>
+          <span class="def-term">QSFP</span><span class="def-val">Quad SFP. 40 Gbps (4×10G). Used in spine-layer switches and high-speed server connections.</span>
+          <span class="def-term">QSFP+</span><span class="def-val">40 Gbps. Used in 40GbE infrastructure.</span>
+          <span class="def-term">QSFP28</span><span class="def-val">100 Gbps. Current high-speed standard in data centers.</span>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Server Components — CPU</div>
+        <div class="def-grid">
+          <span class="def-term">Socket Types</span><span class="def-val">LGA (Land Grid Array) — Intel. AMD uses different socket standards. Socket determines CPU compatibility. Never mix socket types.</span>
+          <span class="def-term">Architecture</span><span class="def-val">x86 (32-bit), x64 (64-bit), ARM (mobile/embedded). Server+ focuses on x64.</span>
+          <span class="def-term">L1 Cache</span><span class="def-val">Fastest, smallest cache. Built directly into each core. Per-core. Typical: 32–64KB per core.</span>
+          <span class="def-term">L2 Cache</span><span class="def-val">Larger than L1, slower. Per-core or shared between pairs. Typical: 256KB–1MB per core.</span>
+          <span class="def-term">L3 Cache</span><span class="def-val">Largest, slowest cache. Shared across all cores on the CPU. Typical: 8–64MB per socket.</span>
+          <span class="def-term">Multi-Socket</span><span class="def-val">Server motherboard with 2 or 4 CPU sockets. Each CPU is a separate physical processor. Used in high-performance servers.</span>
+          <span class="def-term">NUMA</span><span class="def-val">Non-Uniform Memory Access. In multi-socket systems, each CPU has "local" RAM it accesses faster, and "remote" RAM (through the other CPU's controller) it accesses slower. OS and hypervisors must be NUMA-aware for best performance.</span>
+          <span class="def-term">CPU Affinity</span><span class="def-val">Binding a process or VM to a specific CPU core or socket. Improves cache performance. Relevant in virtualization tuning.</span>
+        </div>
+        <div class="callout callout-exam">NUMA is a Server+ exam topic — know that accessing remote memory in a multi-socket system is slower than local memory, and that NUMA-aware software accounts for this.</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Server Components — Memory</div>
+        <div class="def-grid">
+          <span class="def-term">DIMM</span><span class="def-val">Dual Inline Memory Module. Standard server/desktop RAM form factor. 64-bit wide data bus.</span>
+          <span class="def-term">SODIMM</span><span class="def-val">Small Outline DIMM. Laptop and some small-form-factor servers. Not interchangeable with DIMM.</span>
+          <span class="def-term">ECC RAM</span><span class="def-val">Error Correcting Code. Detects and corrects single-bit memory errors silently. Required in enterprise servers. Prevents data corruption and crashes from random bit flips.</span>
+          <span class="def-term">Registered (RDIMM)</span><span class="def-val">Has a register chip between the memory controller and DRAM. Allows more DIMMs per channel. Slightly higher latency. Standard in servers.</span>
+          <span class="def-term">Unregistered (UDIMM)</span><span class="def-val">No register chip. Faster but limited to fewer DIMMs per channel. Common in workstations, not servers.</span>
+          <span class="def-term">LRDIMM</span><span class="def-val">Load-Reduced DIMM. Uses a buffer chip to reduce electrical load on memory controller. Allows even more DIMMs per system than RDIMM. Used in high-density memory configurations.</span>
+          <span class="def-term">DDR Generation</span><span class="def-val">DDR4 was standard for years; DDR5 is current. Each generation is NOT backward compatible — different slot notch position.</span>
+          <span class="def-term">Memory Channels</span><span class="def-val">Dual-channel, quad-channel configurations. Populate matching slots symmetrically for maximum bandwidth.</span>
+        </div>
+        <div class="callout callout-exam">ECC vs non-ECC: ECC corrects single-bit errors, detects double-bit errors. Servers require ECC. Non-ECC is cheaper and faster but unreliable for 24/7 operation. RDIMM vs LRDIMM: same function, LRDIMM allows more capacity per system.</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">PCIe Expansion Slots</div>
+        <div class="def-grid">
+          <span class="def-term">PCIe Lane</span><span class="def-val">Each lane is a point-to-point serial link. More lanes = more bandwidth.</span>
+          <span class="def-term">x1 / x4 / x8 / x16</span><span class="def-val">Number of lanes. x16 = 16 lanes (used by GPUs). x8 = common for NICs and RAID controllers. x4 = NVMe SSDs. x1 = basic cards.</span>
+          <span class="def-term">PCIe 3.0</span><span class="def-val">~1 GB/s per lane. x16 slot = ~16 GB/s. Widely deployed.</span>
+          <span class="def-term">PCIe 4.0</span><span class="def-val">~2 GB/s per lane. Double PCIe 3.0 bandwidth. x16 = ~32 GB/s. Current standard.</span>
+          <span class="def-term">PCIe 5.0</span><span class="def-val">~4 GB/s per lane. Emerging. Used in latest NVMe drives and GPUs.</span>
+          <span class="def-term">Backward Compatible</span><span class="def-val">A PCIe 3.0 card works in a PCIe 4.0 slot at 3.0 speeds. Slots are physically compatible across generations.</span>
+        </div>
+        <div class="callout callout-exam">A RAID controller in an x8 slot physically fits in an x16 slot and works fine — the card runs at its rated x8 speed. Physical slot size does not have to match card lane count (as long as slot is equal or larger).</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Converged Network Adapters (CNA)</div>
+        <p>A CNA combines a standard NIC and a Fibre Channel HBA (Host Bus Adapter) into a single card. It can carry both standard Ethernet traffic AND Fibre Channel storage traffic on the same physical adapter and cable — enabling FCoE. Reduces the number of cards needed and simplifies cabling in converged infrastructure.</p>
+        <div class="callout callout-new">CNAs were a slide that extracted blank in v1. Key point: CNA = NIC + HBA in one card. Used specifically with FCoE to converge storage and network traffic onto a single adapter.</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">KVM & Console Management</div>
+        <div class="def-grid">
+          <span class="def-term">KVM Switch</span><span class="def-val">Keyboard-Video-Mouse switch. One set of input devices controlling multiple servers. Saves physical space.</span>
+          <span class="def-term">IP KVM</span><span class="def-val">KVM accessible over the network. Full remote desktop-like access even during POST or OS failure.</span>
+          <span class="def-term">Crash Cart</span><span class="def-val">Mobile cart with monitor, keyboard, and mouse for direct local access to a failed server. Last resort when network and OOB management are both down.</span>
+          <span class="def-term">Serial Console</span><span class="def-val">Direct serial (rollover cable) connection to device CLI. Used for initial setup and when all other management options fail.</span>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Safety</div>
+        <ul class="concept-list">
+          <li><strong>Rack Balancing</strong> — Install heaviest equipment at bottom. Prevents tipping.</li>
+          <li><strong>Floor Load Limitations</strong> — Data center floors have weight limits per square foot. Raised floors have specific ratings.</li>
+          <li><strong>ESD (Electrostatic Discharge)</strong> — Use wrist straps, mats, and antistatic bags. Ground yourself before touching components.</li>
+          <li><strong>Proper Lifting</strong> — Keep weight on centerline, close to body, at waist level. Do not twist. Push rather than pull when possible.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CH 2 – INSTALLING & CONFIGURING
+  ═══════════════════════════════════════ -->
+  <section class="chapter" id="ch2">
+    <div class="chapter-header">
+      <span class="chapter-num">CH 02</span>
+      <h2 class="chapter-title">Installing & Configuring Servers</h2>
+      <span class="chapter-obj">Obj 2.1 / 2.3 / 2.5</span>
+    </div>
+    <div class="chapter-body">
+
+      <div class="section-block">
+        <div class="section-title">OS Installation Types</div>
+        <div class="def-grid">
+          <span class="def-term">GUI / Attended</span><span class="def-val">Interactive wizard-based install. Simple but slow, requires a human at the keyboard the entire time.</span>
+          <span class="def-term">Core Install</span><span class="def-val">CLI-only. No GUI. Smaller attack surface, smaller disk footprint, lower memory usage. Preferred for production servers. Managed remotely via SSH or PowerShell remoting.</span>
+          <span class="def-term">Bare Metal</span><span class="def-val">OS installed on empty drive with no existing OS. Requires bootable media (USB, DVD, network).</span>
+          <span class="def-term">Slipstreamed / Unattended</span><span class="def-val">Automated using XML answer file (<code>unattend.xml</code>). No human interaction required after launch. Used for mass deployments.</span>
+          <span class="def-term">PXE Boot</span><span class="def-val">Pre-boot Execution Environment. Server boots from network using DHCP (DORA) + TFTP to download the NBP (Network Bootstrap Program). No local bootable media needed.</span>
+          <span class="def-term">Imaging / Cloning</span><span class="def-val">Copy a pre-configured OS image to new hardware. Fastest method for deploying many identical servers.</span>
+          <span class="def-term">Virtualized Install</span><span class="def-val">OS installed inside a VM on an existing hypervisor. No new physical hardware required.</span>
+        </div>
+        <div class="callout callout-exam">Windows Server 2022 minimum: 1.4GHz 64-bit CPU · 512MB RAM · 32GB disk (Core). Always check HCL before installing — unsupported hardware = unsupported OS install.</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">File System Types</div>
+        <div class="def-grid">
+          <span class="def-term">NTFS</span><span class="def-val">Windows standard since NT. Supports: permissions/ACLs, EFS encryption, journaling, compression, large files (up to 8PB volume). Replaced FAT32.</span>
+          <span class="def-term">FAT32</span><span class="def-val">Legacy. Max file size 4GB. Max volume 32GB (in Windows format tool). Still used on bootable USB drives and older systems.</span>
+          <span class="def-term">ReFS</span><span class="def-val">Resilient File System. Microsoft's modern evolution of NTFS. Built-in integrity checking, better resilience. Cannot be used as a boot volume.</span>
+          <span class="def-term">EXT4</span><span class="def-val">Linux default filesystem. Max file: 16TB. Max volume: 1EB. Supports journaling. Not natively readable by Windows.</span>
+          <span class="def-term">XFS</span><span class="def-val">Linux filesystem. Excellent performance for large files. Default on RHEL 7+.</span>
+          <span class="def-term">ZFS</span><span class="def-val">Zettabyte File System. Open source (originally Sun). Max file: 16EB. Max volume: 256ZB. Built-in RAID (RAIDZ), snapshots, checksumming, deduplication. Used in TrueNAS.</span>
+          <span class="def-term">VMFS</span><span class="def-val">VMware File System. Used exclusively by VMware vSphere/ESXi for datastore volumes. Max 64TB. Optimized for concurrent VM I/O.</span>
+        </div>
+        <div class="callout callout-mil">Your TrueNAS runs ZFS — you already know RAIDZ1 = RAID5 equivalent, snapshots are instant, and ZFS self-heals bit rot by comparing data against checksums. That homelab experience directly maps to enterprise ZFS deployments.</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Volume & Partition Types</div>
+        <div class="def-grid">
+          <span class="def-term">Basic Disk</span><span class="def-val">Standard partition table (MBR or GPT). Up to 4 primary partitions (MBR) or 128 (GPT). Default for new disks.</span>
+          <span class="def-term">Dynamic Disk</span><span class="def-val">Windows-specific. Supports advanced volume types (spanned, striped, mirrored) without hardware RAID. Managed by Windows Disk Management.</span>
+          <span class="def-term">Simple Volume</span><span class="def-val">One partition on one disk. Standard basic volume.</span>
+          <span class="def-term">Spanned Volume</span><span class="def-val">Single volume spread across 2–32 disks. No redundancy, no speed gain. Fails if any disk fails.</span>
+          <span class="def-term">Striped Volume</span><span class="def-val">Software RAID 0 across 2+ disks. Fast, no redundancy.</span>
+          <span class="def-term">Mirrored Volume</span><span class="def-val">Software RAID 1 across 2 disks. Fault tolerant. Requires Dynamic Disk.</span>
+          <span class="def-term">RAID-5 Volume</span><span class="def-val">Software RAID 5 on Windows. Requires 3+ disks. Fault tolerant. Windows Server only.</span>
+          <span class="def-term">MBR</span><span class="def-val">Master Boot Record. Legacy partition scheme. Max 4 primary partitions. Max 2TB disk size. BIOS boots from MBR.</span>
+          <span class="def-term">GPT</span><span class="def-val">GUID Partition Table. Modern scheme. Max 128 partitions. Supports drives >2TB. Required for UEFI boot. Includes protective MBR for backward compatibility.</span>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Logical Volume Management (LVM) — Linux</div>
+        <p>LVM adds a layer of abstraction between physical storage and the filesystem, allowing flexible resizing and management of storage without repartitioning.</p>
+        <div class="def-grid">
+          <span class="def-term">PV (Physical Volume)</span><span class="def-val">The actual physical disk or partition. Lowest level. Created with <code>pvcreate</code>.</span>
+          <span class="def-term">VG (Volume Group)</span><span class="def-val">Pool of storage created from one or more PVs. Created with <code>vgcreate</code>.</span>
+          <span class="def-term">LV (Logical Volume)</span><span class="def-val">Chunk of storage carved from a VG. This is what gets formatted with a filesystem and mounted. Created with <code>lvcreate</code>.</span>
+          <span class="def-term">PE (Physical Extent)</span><span class="def-val">Fixed-size chunk (default 4MB) that LVM uses internally. LVs are made up of PEs.</span>
+        </div>
+        <div class="callout callout-exam">The LVM hierarchy: Physical Disk → Physical Volume (PV) → Volume Group (VG) → Logical Volume (LV) → Filesystem → Mount Point. LVM allows you to resize LVs on the fly, add disks to VGs, and take snapshots — without unmounting or repartitioning.</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Server Roles</div>
+        <div class="def-grid">
+          <span class="def-term">Domain Controller (DC)</span><span class="def-val">Runs Active Directory. Authenticates users, enforces Group Policy, manages domains. High RAM and fast disk I/O priority. Critical — redundant DCs should always exist.</span>
+          <span class="def-term">DNS Server</span><span class="def-val">Resolves hostnames to IP addresses. High network I/O. Often co-located with DC. Failure breaks most network services.</span>
+          <span class="def-term">DHCP Server</span><span class="def-val">Assigns IP configurations to clients. Low resource needs. Should be redundant (failover DHCP).</span>
+          <span class="def-term">File Server</span><span class="def-val">Centralized file storage and sharing. High disk I/O and capacity priority. SMB/CIFS (Windows), NFS (Linux).</span>
+          <span class="def-term">Web Server</span><span class="def-val">Hosts web applications. High network I/O. IIS (Windows), Apache/Nginx (Linux).</span>
+          <span class="def-term">Database Server</span><span class="def-val">Hosts databases (SQL Server, MySQL, Oracle). High RAM and disk IOPS priority. Often benefits most from RAID 10.</span>
+          <span class="def-term">Print Server</span><span class="def-val">Manages print queues and printer sharing. Low resource needs generally.</span>
+          <span class="def-term">Mail Server</span><span class="def-val">Handles email (Exchange, Postfix). High disk I/O. Uses SMTP (25), POP3 (110), IMAP (143).</span>
+          <span class="def-term">Application Server</span><span class="def-val">Hosts business applications (ERP, CRM). Resource needs vary. May need to be near database server.</span>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Virtualization</div>
+        <div class="def-grid">
+          <span class="def-term">Type 1 Hypervisor</span><span class="def-val">Bare metal. Runs directly on hardware with no host OS. Best performance. Examples: VMware ESXi, Microsoft Hyper-V (server), Proxmox, Xen.</span>
+          <span class="def-term">Type 2 Hypervisor</span><span class="def-val">Hosted. Runs on top of a host OS. Easy to set up, lower performance. Examples: VMware Workstation, VirtualBox, Parallels.</span>
+          <span class="def-term">Host</span><span class="def-val">Physical machine running the hypervisor. Provides hardware resources.</span>
+          <span class="def-term">Guest</span><span class="def-val">Virtual machine running inside the hypervisor. Thinks it has dedicated hardware but actually shares host resources.</span>
+          <span class="def-term">vSwitch</span><span class="def-val">Virtual switch inside the hypervisor. Connects VMs to each other and to physical NICs. Behaves like a physical switch.</span>
+          <span class="def-term">Port Group</span><span class="def-val">VMware term for a named configuration on a vSwitch. VMs connect to port groups, which are associated with VLANs.</span>
+          <span class="def-term">Overprovisioning</span><span class="def-val">Assigning more virtual resources than physical resources exist. Works if VMs don't all peak simultaneously. Risky if workloads spike together.</span>
+          <span class="def-term">Thin Provision</span><span class="def-val">Disk space allocated on demand. Efficient storage use but can run out unexpectedly if overcommitted.</span>
+          <span class="def-term">Thick Lazy Zeroed</span><span class="def-val">Full space allocated at creation, zeroed on first write. Fast to create. Best for most general VMs.</span>
+          <span class="def-term">Thick Eager Zeroed</span><span class="def-val">Full space allocated AND zeroed at creation time. Slowest to create, best runtime I/O performance. Use for databases and latency-sensitive VMs.</span>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Container-Based Virtualization</div>
+        <div class="def-grid">
+          <span class="def-term">Container</span><span class="def-val">Lightweight virtualization at the OS level rather than hardware level. Containers share the host OS kernel — no separate guest OS per container. Much faster to start and more resource-efficient than VMs.</span>
+          <span class="def-term">Container vs VM</span><span class="def-val">VM = full OS per guest (higher overhead, stronger isolation). Container = shared kernel (lower overhead, faster, less isolation). VMs are better for security isolation; containers are better for scalability and speed.</span>
+          <span class="def-term">Docker</span><span class="def-val">Most common container platform. Packages applications with all dependencies into a portable image. Runs on Linux or Windows.</span>
+          <span class="def-term">Kubernetes (K8s)</span><span class="def-val">Container orchestration platform. Manages deployment, scaling, and failover of containers across multiple hosts.</span>
+          <span class="def-term">Container Image</span><span class="def-val">Read-only template used to create containers. Stored in a registry (Docker Hub). Images are layered — each layer adds changes on top of the previous.</span>
+        </div>
+        <div class="callout callout-exam">Containers = OS-level virtualization (shared kernel). VMs = hardware-level virtualization (separate OS per guest). The exam may call containers "application virtualization" or reference Docker/container-based deployments as a "hybrid" virtualization approach.</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Cloud Models</div>
+        <p class="mini-h">NIST 5 Characteristics of Cloud Computing</p>
+        <div class="def-grid">
+          <span class="def-term">On-Demand Self-Service</span><span class="def-val">Resources provisioned by the consumer without involving the CSP. No phone calls, no wait.</span>
+          <span class="def-term">Broad Network Access</span><span class="def-val">Services available over the network from any standard device (phone, tablet, laptop, server).</span>
+          <span class="def-term">Resource Pooling</span><span class="def-val">Compute resources pooled and dynamically allocated across multiple tenants. Multi-tenant model.</span>
+          <span class="def-term">Rapid Elasticity</span><span class="def-val">Resources scale up and down on demand. Consumers pay for what they use at any given time.</span>
+          <span class="def-term">Measured Service</span><span class="def-val">Resource utilization monitored, controlled, and billed based on actual use. Pay-as-you-go.</span>
+        </div>
+        <div class="callout callout-exam">CompTIA expects you to name all five NIST cloud characteristics. Mnemonic: <strong>O-B-R-R-M</strong> — On-demand, Broad access, Resource pooling, Rapid elasticity, Measured service.</div>
+        <p class="mini-h">Deployment Models</p>
+        <div class="def-grid">
+          <span class="def-term">Public Cloud</span><span class="def-val">Resources shared among multiple tenants. Owned and operated by CSP (AWS, Azure, GCP). Cheapest, least control.</span>
+          <span class="def-term">Private Cloud</span><span class="def-val">Dedicated to one organization. On-premises or hosted. Most control, highest cost.</span>
+          <span class="def-term">Hybrid Cloud</span><span class="def-val">Mix of public and private. Sensitive workloads stay private, scalable workloads burst to public.</span>
+          <span class="def-term">Community Cloud</span><span class="def-val">Shared by organizations with common concerns (government, healthcare, finance). Managed by members or a provider.</span>
+        </div>
+        <p class="mini-h">Service Models</p>
+        <div class="def-grid">
+          <span class="def-term">IaaS</span><span class="def-val">Infrastructure as a Service. You manage OS and up. Provider manages hardware, networking, virtualization. Target audience: sysadmins. Example: AWS EC2, Azure VMs.</span>
+          <span class="def-term">PaaS</span><span class="def-val">Platform as a Service. Provider manages OS and runtime. You manage application and data. Target audience: developers, DBAs. Example: Azure App Service, Google App Engine.</span>
+          <span class="def-term">SaaS</span><span class="def-val">Software as a Service. Provider manages everything. You just use the app. Target audience: end users. Example: Office 365, Salesforce, Netflix.</span>
+        </div>
+        <p class="mini-h">Shared Security Model</p>
+        <div class="def-grid">
+          <span class="def-term">CSP Responsibility</span><span class="def-val">Security <em>of</em> the cloud. Physical data center security, hardware availability, hypervisor security. The CSP owns and protects the infrastructure.</span>
+          <span class="def-term">Customer Responsibility</span><span class="def-val">Security <em>in</em> the cloud. Data security, access management, OS patching (in IaaS), application security. You own and protect your data and configs.</span>
+        </div>
+        <div class="callout callout-exam">Shared security model: CSP secures the cloud infrastructure. YOU secure your data and workloads inside it. This line shifts depending on IaaS vs PaaS vs SaaS — the more managed the service, the more the CSP takes on.</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Monitoring & Administration</div>
+        <div class="def-grid">
+          <span class="def-term">Uptime / Nines</span><span class="def-val">99.9% = 8.76 hrs/yr downtime · 99.99% = 52.6 min/yr · 99.999% = 5.3 min/yr · 99.9999% = 31.5 sec/yr</span>
+          <span class="def-term">Baselining</span><span class="def-val">Document normal performance metrics (CPU, RAM, disk I/O, network). Compare current against baseline to detect problems or plan capacity.</span>
+          <span class="def-term">Thresholds & Alerts</span><span class="def-val">Set alert triggers for when metrics exceed acceptable ranges. Proactive rather than reactive monitoring.</span>
+          <span class="def-term">IOPS</span><span class="def-val">Input/Output Operations Per Second. Key storage performance metric. SSDs: hundreds of thousands. HDDs: hundreds.</span>
+          <span class="def-term">Event Logs</span><span class="def-val">Windows: Event Viewer (System, Application, Security logs). Configure: retention policy, shipping to SIEM, alerting.</span>
+          <span class="def-term">SNMP</span><span class="def-val">Simple Network Management Protocol (port 161). Used to monitor network devices and servers. SNMP traps send alerts on events.</span>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Storage Management</div>
+        <div class="def-grid">
+          <span class="def-term">Formatting</span><span class="def-val">Creates a file system on a partition. Choose file system type (NTFS, ext4, ZFS, etc.) appropriate for the OS and workload.</span>
+          <span class="def-term">Partitioning</span><span class="def-val">Dividing a disk into logical sections. Each partition can have a different file system and purpose (OS, data, swap).</span>
+          <span class="def-term">Provisioning</span><span class="def-val">Allocating storage capacity to servers or volumes. Thin provisioning allocates on demand. Thick provisioning reserves space up front.</span>
+          <span class="def-term">Disk Quotas</span><span class="def-val">Limits on how much disk space a user or group can consume. Prevents any single user from filling shared storage. Configured per volume in Windows and Linux.</span>
+          <span class="def-term">Compression</span><span class="def-val">Reduces size of stored data by encoding it more efficiently. NTFS supports per-file and per-folder compression. Trade-off: saves space but adds CPU overhead for read/write operations.</span>
+          <span class="def-term">Deduplication</span><span class="def-val">Identifies and eliminates duplicate copies of data. Only one copy of identical data blocks is stored; other locations point to the same block. Can be post-process (after write) or inline (checked before write). Significant space savings in virtualized environments and backup storage.</span>
+          <span class="def-term">Page / Swap / Scratch</span><span class="def-val">Virtual memory overflow space on disk. Windows = page file. Linux = swap partition or swap file. Scratch = temp workspace for applications (video editing, databases). Location and size should be configured intentionally — placing on a fast dedicated disk improves performance.</span>
+          <span class="def-term">Data Transfer — SCP</span><span class="def-val">Secure Copy Protocol. Uses SSH (port 22) to securely copy files between systems. Syntax: <code>scp source user@host:/destination</code>. Encrypted — preferred over FTP for sensitive data.</span>
+          <span class="def-term">Data Transfer — Robocopy</span><span class="def-val">Robust File Copy. Windows command-line tool. Handles retries, copies directory structure, ACLs, timestamps. Syntax: <code>robocopy source destination [options]</code>. Ideal for large migrations and synchronization.</span>
+        </div>
+        <div class="callout callout-exam">Deduplication vs compression: Dedup removes duplicate data blocks across the storage system. Compression shrinks individual files/blocks. Both save space but through different mechanisms. Dedup is most effective where many similar files exist (VMs, backups). Compression is most effective on compressible data (text, logs, databases).</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CH 3 – SERVER MAINTENANCE
+  ═══════════════════════════════════════ -->
+  <section class="chapter" id="ch3">
+    <div class="chapter-header">
+      <span class="chapter-num">CH 03</span>
+      <h2 class="chapter-title">Server Maintenance</h2>
+      <span class="chapter-obj">Obj 1.3 / 2.8</span>
+    </div>
+    <div class="chapter-body">
+
+      <div class="section-block">
+        <div class="section-title">Out-of-Band (OOB) Management</div>
+        <p>OOB = managing a server using a channel completely separate from the production network. Works even when the server is powered off, OS is crashed, or network is down.</p>
+        <div class="def-grid">
+          <span class="def-term">IPMI</span><span class="def-val">Intelligent Platform Management Interface. Industry-standard spec for OOB management. Uses a dedicated BMC chip on the motherboard. Communicates over a dedicated management network port.</span>
+          <span class="def-term">BMC</span><span class="def-val">Baseboard Management Controller. The microcontroller chip that implements IPMI. Has its own firmware, NIC, and power (runs on standby power even when server is off). The "brain" of OOB management.</span>
+          <span class="def-term">iLO (HPE)</span><span class="def-val">Integrated Lights-Out. HP/HPE's implementation of OOB management. Dedicated Ethernet port. Allows remote KVM, power control, hardware monitoring.</span>
+          <span class="def-term">iDRAC (Dell)</span><span class="def-val">Integrated Dell Remote Access Controller. Dell's equivalent to iLO. Same capabilities: remote console, power management, hardware monitoring.</span>
+          <span class="def-term">Wake on LAN</span><span class="def-val">NIC listens for a "magic packet" (Layer 2 broadcast) even when powered off. Can turn on server remotely. Security risk — disable if not needed.</span>
+          <span class="def-term">IP KVM</span><span class="def-val">Network-accessible KVM. Full keyboard/video/mouse control over IP. Works before OS loads.</span>
+          <span class="def-term">Crash Cart</span><span class="def-val">Mobile monitor+keyboard cart for direct local physical access. Used when all remote access fails.</span>
+          <span class="def-term">Serial Console</span><span class="def-val">Rollover/console cable from laptop to server's serial/console port. Access CLI during boot or after OS failure.</span>
+        </div>
+        <div class="callout callout-mil">BMC/IPMI is your dedicated comms channel that bypasses normal radio nets. Your radio goes down? You still have PACE: Primary, Alternate, Contingency, Emergency. BMC is the Emergency channel — always up, separate network, separate power.</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Drive Types & Speeds</div>
+        <table class="data-table">
+          <thead><tr><th>Type</th><th>Speed</th><th>Avg Latency</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td><span class="hl-gold">HDD 5,400 RPM</span></td><td>~100 MB/s</td><td>5.5ms</td><td>Consumer. Archival/NAS storage.</td></tr>
+            <tr><td><span class="hl-gold">HDD 7,200 RPM</span></td><td>~150 MB/s</td><td>4.2ms</td><td>Standard server/NAS drives (IronWolf Pro).</td></tr>
+            <tr><td><span class="hl-gold">HDD 10,000 RPM</span></td><td>~200 MB/s</td><td>3ms</td><td>Enterprise performance HDDs. SAS interface.</td></tr>
+            <tr><td><span class="hl-gold">HDD 15,000 RPM</span></td><td>~250 MB/s</td><td>2ms</td><td>Highest-performance spinning disk. SAS only.</td></tr>
+            <tr><td><span class="hl-gold">SSHD (Hybrid)</span></td><td>Varies</td><td>Varies</td><td>SSD cache + HDD capacity. Single unit.</td></tr>
+            <tr><td><span class="hl-gold">SSD SATA</span></td><td>~550 MB/s</td><td>&lt;0.1ms</td><td>Faster than any HDD. Limited by SATA interface.</td></tr>
+            <tr><td><span class="hl-gold">SSD NVMe</span></td><td>3,000–7,000 MB/s</td><td>&lt;0.05ms</td><td>PCIe-connected. 5–10× faster than SATA SSD. Current enterprise standard for high-performance storage.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Hot-Swappable Components</div>
+        <ul class="concept-list">
+          <li><strong>Hot-swap</strong> — Replace while running, zero downtime. Requires hardware and OS/firmware support.</li>
+          <li><strong>Warm-swap</strong> — Requires brief power-down or pause but not full shutdown.</li>
+          <li><strong>Cold-swap</strong> — Must fully power down before replacement. Most components.</li>
+          <li><strong>Hot-swappable in enterprise servers</strong>: Drives (SAS/SATA in hot-swap bays), Power supplies, Fans, Some RAM (in specific enterprise designs).</li>
+          <li><strong>Drive cages/backplanes</strong> — The backplane provides power and data to drives and enables hot-swap. A backplane failure = all drives in that bay lose access.</li>
+          <li>Always verify hot-swap capability in documentation before attempting. Not all SATA drives are hot-swappable even if the bay says so.</li>
+        </ul>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">UEFI / BIOS</div>
+        <div class="def-grid">
+          <span class="def-term">BIOS</span><span class="def-val">Basic Input/Output System. Legacy firmware. 16-bit. Limited to 2.2TB disks. MBR-only boot.</span>
+          <span class="def-term">UEFI</span><span class="def-val">Unified Extensible Firmware Interface. Modern replacement for BIOS. 64-bit. Supports drives >2.2TB, GPT, Secure Boot, faster POST.</span>
+          <span class="def-term">Secure Boot</span><span class="def-val">UEFI feature. Verifies OS bootloader is cryptographically signed by a trusted authority before loading. Prevents unsigned/malicious OS from booting. Must disable for some Linux installs or custom boot scenarios.</span>
+          <span class="def-term">POST</span><span class="def-val">Power-On Self-Test. Runs at startup. Tests CPU, RAM, storage, video. Beep codes signal failures before OS loads.</span>
+          <span class="def-term">CMOS</span><span class="def-val">Complementary Metal-Oxide Semiconductor. Chip that stores BIOS/UEFI settings (date/time, boot order). Powered by a small lithium battery (CR2032). If battery dies, server loses settings.</span>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Licensing Models</div>
+        <div class="def-grid">
+          <span class="def-term">Per-Instance</span><span class="def-val">One license per installation. Install on 5 servers = 5 licenses.</span>
+          <span class="def-term">Per-Core</span><span class="def-val">Licensed per physical CPU core. Common in Microsoft Windows Server and SQL Server. A 2-socket server with 16 cores each = 32 core licenses needed.</span>
+          <span class="def-term">Per-Socket</span><span class="def-val">One license per CPU socket. A dual-socket server = 2 licenses.</span>
+          <span class="def-term">Per-Concurrent User</span><span class="def-val">Max number of users logged in simultaneously. Cheaper if user count is low and staggered.</span>
+          <span class="def-term">Per-Server</span><span class="def-val">Max connections to that specific server.</span>
+          <span class="def-term">Node-Locked</span><span class="def-val">License tied to a specific device (MAC address or hardware fingerprint). Cannot be moved.</span>
+          <span class="def-term">Volume / Site License</span><span class="def-val">Single key for multiple systems. Enterprise agreement. Simplifies management.</span>
+          <span class="def-term">Subscription</span><span class="def-val">Pay recurring fee. License expires if not renewed. Common in SaaS and modern enterprise software.</span>
+          <span class="def-term">True-Up</span><span class="def-val">License count validation. Reconciling actual usage against purchased licenses — usually done annually in enterprise agreements.</span>
+          <span class="def-term">Copyleft (GPL)</span><span class="def-val">Open source. Derivative works must also be open source. "Viral" license.</span>
+          <span class="def-term">Permissive (MIT/Apache)</span><span class="def-val">Open source. No restrictions on derivatives. Can incorporate into proprietary products.</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CH 4 – STORAGE
+  ═══════════════════════════════════════ -->
+  <section class="chapter" id="ch4">
+    <div class="chapter-header">
+      <span class="chapter-num">CH 04</span>
+      <h2 class="chapter-title">Storage Technologies & Asset Management</h2>
+      <span class="chapter-obj">Obj 1.2 / 2.7</span>
+    </div>
+    <div class="chapter-body">
+
+      <div class="section-block">
+        <div class="section-title">RAID Levels — Master Reference</div>
+        <table class="data-table">
+          <thead><tr><th>RAID</th><th>Type</th><th>Min Drives</th><th>Drive Overhead</th><th>Fault Tolerance</th><th>Performance</th><th>Best For</th></tr></thead>
+          <tbody>
+            <tr><td><span class="hl-blue">RAID 0</span></td><td>Striping</td><td>2</td><td>0 (100% usable)</td><td><span class="bad">None</span></td><td><span class="good">Fastest R/W</span></td><td>Temp data, video editing</td></tr>
+            <tr><td><span class="hl-blue">RAID 1</span></td><td>Mirroring</td><td>2</td><td>50% (half wasted)</td><td><span class="good">1 drive failure</span></td><td><span class="good">Fast read</span>, normal write</td><td>OS drives, critical data</td></tr>
+            <tr><td><span class="hl-blue">RAID 5</span></td><td>Stripe + Parity</td><td>3</td><td>1 drive</td><td><span class="good">1 drive failure</span></td><td>Good read, moderate write</td><td>General purpose. Most common.</td></tr>
+            <tr><td><span class="hl-blue">RAID 6</span></td><td>Stripe + Double Parity</td><td>4</td><td>2 drives</td><td><span class="good">2 drive failures</span></td><td>Good read, <span class="bad">slower write</span></td><td>Large arrays, high rebuild risk</td></tr>
+            <tr><td><span class="hl-blue">RAID 10</span></td><td>Stripe of Mirrors (1+0)</td><td>4</td><td>50% (half wasted)</td><td><span class="good">1 per mirror set</span></td><td><span class="good">Fastest R/W + redundancy</span></td><td>Databases, high-performance</td></tr>
+            <tr><td><span class="hl-blue">JBOD</span></td><td>Just a Bunch of Disks</td><td>1</td><td>0 (100% usable)</td><td><span class="bad">None</span></td><td>Normal</td><td>Flexible pooling, no redundancy</td></tr>
+          </tbody>
+        </table>
+        <div class="callout callout-exam">Capacity math: RAID 5 = (N−1) × drive size. RAID 6 = (N−2) × drive size. RAID 10 = (N/2) × drive size. Example: RAID 6 with 4×250GB = (4−2)×250 = 500GB usable. Your TrueNAS RAIDZ1 (3×20TB) ≈ RAID 5: (3−1)×20TB = 40TB usable.</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Hardware vs. Software RAID</div>
+        <div class="two-col">
+          <div>
+            <p class="mini-h">Hardware RAID</p>
+            <ul class="concept-list">
+              <li>Dedicated RAID controller card (PCIe).</li>
+              <li>Controller has its own processor and cache (with battery backup).</li>
+              <li>OS sees drives as a single logical volume — doesn't know RAID is happening.</li>
+              <li>Faster, more reliable. More expensive.</li>
+              <li><strong>Disk Duplexing</strong> — RAID 1 variant where each mirrored drive has its own separate controller. Protects against both drive failure AND controller failure.</li>
+            </ul>
+          </div>
+          <div>
+            <p class="mini-h">Software RAID</p>
+            <ul class="concept-list">
+              <li>OS manages RAID (Windows Storage Spaces, Linux mdadm, ZFS).</li>
+              <li>Uses CPU and RAM from the host — impacts server performance.</li>
+              <li>Cheaper. More flexible.</li>
+              <li>Less scalable for complex RAID configurations.</li>
+              <li>ZFS is technically software RAID but extremely capable — used in TrueNAS.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Capacity Planning Math</div>
+        <div class="def-grid">
+          <span class="def-term">Base 2 vs Base 10</span><span class="def-val">Drive manufacturers use base 10 (1KB = 1,000 bytes). OS uses base 2 (1KB = 1,024 bytes). A "1TB" drive appears as ~931GB in Windows/Linux. This discrepancy grows larger with bigger drives.</span>
+          <span class="def-term">1 KB (base 2)</span><span class="def-val">2¹⁰ = 1,024 bytes</span>
+          <span class="def-term">1 MB (base 2)</span><span class="def-val">2²⁰ = 1,048,576 bytes</span>
+          <span class="def-term">1 GB (base 2)</span><span class="def-val">2³⁰ = 1,073,741,824 bytes</span>
+          <span class="def-term">1 TB (base 2)</span><span class="def-val">2⁴⁰ = 1,099,511,627,776 bytes</span>
+          <span class="def-term">Growth Planning</span><span class="def-val">Account for: OS files, patches/service packs, application growth, logs, temp files. The Windows component store (winsxs) grows with every update — plan for it.</span>
+          <span class="def-term">Storage Tiering</span><span class="def-val">Automatically moves hot (frequently accessed) data to faster storage (NVMe/SSD) and cold data to slower storage (HDD/tape). Optimizes cost vs. performance. Common in enterprise SANs and ZFS (L2ARC cache, ZIL).</span>
+        </div>
+        <div class="callout callout-exam">On the exam: if they say a "500GB drive" and ask how much space Windows will show — the answer is less than 500GB (approximately 465GB) because Windows uses base 2 and manufacturers use base 10.</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Shared Storage Types</div>
+        <div class="def-grid">
+          <span class="def-term">DAS</span><span class="def-val">Direct Attached Storage. Connected to one server (USB, SATA, SAS). Not shared. Simple, fast, cheap. Cannot be accessed by other servers.</span>
+          <span class="def-term">NAS</span><span class="def-val">Network Attached Storage. File-level storage over the network. Multiple servers access simultaneously. Uses NFS (Linux/Unix) or CIFS/SMB (Windows). Your TrueNAS = NAS.</span>
+          <span class="def-term">SAN</span><span class="def-val">Storage Area Network. Block-level access. Server sees storage as a local disk. Uses Fibre Channel or iSCSI. Fastest and most expensive shared storage.</span>
+          <span class="def-term">iSCSI</span><span class="def-val">SCSI commands encapsulated in IP packets. SAN over standard Ethernet. Cost-effective alternative to Fibre Channel. Uses existing network infrastructure.</span>
+          <span class="def-term">Fibre Channel (FC)</span><span class="def-val">Dedicated high-speed storage network. 8/16/32 Gbps. Requires separate FC switches (not Ethernet). Lowest latency, highest cost.</span>
+          <span class="def-term">FCoE</span><span class="def-val">Fibre Channel over Ethernet. Encapsulates FC frames in Ethernet. Does NOT use IP (unlike iSCSI). Requires a CNA. Convergence of FC and Ethernet infrastructure.</span>
+          <span class="def-term">NFS</span><span class="def-val">Network File System. Linux/Unix file sharing protocol. Mounts remote directories as if local. Layer 7 protocol.</span>
+          <span class="def-term">CIFS/SMB</span><span class="def-val">Common Internet File System / Server Message Block. Windows file sharing. SMB3 is current. Used for Windows shared folders and NAS access from Windows.</span>
+        </div>
+        <div class="callout callout-exam">NAS = file-level (you see files/folders). SAN = block-level (you see a raw disk, format it yourself). iSCSI encapsulates SCSI in IP. FCoE encapsulates FC in Ethernet (no IP). This distinction appears in almost every exam. DAS = one server only, no sharing.</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Asset Management</div>
+        <div class="def-grid">
+          <span class="def-term">Inventory Fields</span><span class="def-val">Make, Model, Serial Number, Asset Tag, BIOS asset tag. Track all of these for every piece of hardware. The BIOS asset tag survives OS reinstalls.</span>
+          <span class="def-term">Lifecycle Stages</span><span class="def-val">Procurement → Usage → EOL (End of Life) → Disposal/Recycling. Server hardware useful life: typically <strong>3–7 years</strong>. EOL = no more vendor support or patches. Plan replacement before EOL.</span>
+          <span class="def-term">Procurement</span><span class="def-val">Define specs based on role → RFP process → pricing/contract → finalization/shipping. Security requirements (MFA, encryption, patching) should be built into the RFP.</span>
+          <span class="def-term">Capital Lease</span><span class="def-val">You own the asset at end of lease term. Appears on balance sheet as an asset. Tax depreciation benefits.</span>
+          <span class="def-term">Operating Lease</span><span class="def-val">You return the asset. Treated as ongoing expense (OpEx). Predictable monthly payments. Protection against hardware obsolescence.</span>
+          <span class="def-term">Warranty</span><span class="def-val">Covers manufacturer defects. Document warranty details during procurement. Know how to escalate to vendor quickly.</span>
+          <span class="def-term">Service Plan Tiers</span><span class="def-val">Common tiers: (1) On-site, 4-hour response same business day. (2) On-site, same business day. (3) On-site, next business day. Higher tier = higher cost = lower RTO.</span>
+          <span class="def-term">Labeling</span><span class="def-val">Port labels, system labels, circuit labels, patch panel labels. Everything labeled = faster troubleshooting.</span>
+          <span class="def-term">Change Management</span><span class="def-val">Formal process: Request → Review → Approve → Implement → Document. No unauthorized changes. Every change documented including rollback plan.</span>
+        </div>
+        <div class="callout callout-exam">Server useful life = 3–7 years. Windows Server OS support lifecycle = ~12 years after initial release. A server may reach EOL before the OS does — evaluate hardware capability, driver support, and vendor support together.</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Business Impact & Service Metrics</div>
+        <p>These metrics are directly tested on Server+ and appear in the Ch4 slides under Company Policies and Procedures. Know all six.</p>
+        <div class="def-grid">
+          <span class="def-term">BIA (Business Impact Analysis)</span><span class="def-val">Identifies which systems and processes are most critical to operations and quantifies the impact of their disruption. Performed FIRST — everything else (DR sites, backup frequency, SLAs) flows from BIA findings.</span>
+          <span class="def-term">MTBF (Mean Time Between Failures)</span><span class="def-val">Average time a component operates before failing. Higher MTBF = more reliable. Example: a drive with MTBF of 100,000 hours is more reliable than one rated 50,000 hours. Used in hardware procurement and lifecycle planning.</span>
+          <span class="def-term">MTTR (Mean Time to Repair)</span><span class="def-val">Average time to restore a failed component. Lower MTTR = faster recovery. Drives decisions about spare parts inventory, on-site support contracts, and technician training.</span>
+          <span class="def-term">RTO (Recovery Time Objective)</span><span class="def-val">Maximum acceptable downtime after a disaster. "How long can we be offline?" Determines DR site type (hot/warm/cold) and level of automation required for failover.</span>
+          <span class="def-term">RPO (Recovery Point Objective)</span><span class="def-val">Maximum acceptable data loss measured in time. "How much data can we lose?" An RPO of 1 hour = must back up at least every hour. Determines backup frequency and whether synchronous replication is needed.</span>
+          <span class="def-term">SLA (Service Level Agreement)</span><span class="def-val">Defines expected uptime and performance between provider and customer. Includes financial remedies for unmet metrics. SLA drives how aggressively BIA metrics must be met.</span>
+          <span class="def-term">Uptime Requirements</span><span class="def-val">Derived from BIA and SLA. 99.9% allows ~8.7 hrs/yr downtime. 99.99% allows ~52 min/yr. The more 9s required, the more expensive and complex the infrastructure.</span>
+        </div>
+        <div class="callout callout-exam">BIA → determines RTO and RPO → drives DR site choice and backup frequency → all formalized in SLA. MTBF and MTTR inform hardware choices and support contracts. Expect scenario questions where you must identify which metric is being described or which comes first in planning.</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Secure Storage of Sensitive Documentation</div>
+        <p>Sensitive documentation must be protected with the same rigor as production systems. The following types require restricted access, encryption at rest, and access logging:</p>
+        <div class="def-grid">
+          <span class="def-term">PII (Personally Identifiable Information)</span><span class="def-val">Any data that can identify an individual — name, SSN, date of birth, address, email, phone. Regulated by GDPR, CCPA, and sector-specific laws. Breach notification requirements apply.</span>
+          <span class="def-term">HR Records</span><span class="def-val">Employee performance reviews, disciplinary records, compensation data, medical information. Restricted to HR and direct managers. Legal retention requirements vary by jurisdiction.</span>
+          <span class="def-term">Financial Documents</span><span class="def-val">Non-public financial data, budget information, contracts, pricing. Regulated by SOX for public companies. Internal access control lists must be maintained.</span>
+          <span class="def-term">Trade Secrets & Proprietary Methods</span><span class="def-val">Formulas, processes, designs, source code, and business strategies that give competitive advantage. Loss can cause irreversible financial damage. NDA required before disclosure.</span>
+          <span class="def-term">Plans and Designs</span><span class="def-val">Network diagrams, architecture plans, DR documentation. In the wrong hands these reveal attack surfaces and critical system weaknesses. Store separately from general documentation.</span>
+        </div>
+        <div class="callout callout-exam">Server+ specifically tests that you know sensitive documentation requires the same security controls as systems — encryption at rest, access control, audit logging, and secure destruction when no longer needed. The slides explicitly list these five categories.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CH 5 – FAULT TOLERANCE
+  ═══════════════════════════════════════ -->
+  <section class="chapter" id="ch5">
+    <div class="chapter-header">
+      <span class="chapter-num">CH 05</span>
+      <h2 class="chapter-title">Fault Tolerance Requirements</h2>
+      <span class="chapter-obj">Obj 2.4</span>
+    </div>
+    <div class="chapter-body">
+
+      <div class="section-block">
+        <div class="section-title">Clustering</div>
+        <div class="def-grid">
+          <span class="def-term">Active-Active</span><span class="def-val">All nodes actively handle workload simultaneously. Load is distributed. Maximum performance and utilization. If one node fails, remaining nodes absorb its load (may degrade performance).</span>
+          <span class="def-term">Active-Passive</span><span class="def-val">One node active, one (or more) standby. Passive node sits idle until primary fails. Simpler than active-active but wastes standby capacity.</span>
+          <span class="def-term">Heartbeat</span><span class="def-val">Dedicated network connection between cluster nodes. Nodes send "I'm alive" messages continuously. If heartbeat stops, surviving node assumes partner is dead and takes over — this is called a failover.</span>
+          <span class="def-term">Split-Brain</span><span class="def-val">When heartbeat link fails but both nodes are actually still running. Both nodes may try to take ownership of resources simultaneously, causing data corruption. Requires a quorum device or tiebreaker to resolve.</span>
+          <span class="def-term">Quorum</span><span class="def-val">Mechanism to prevent split-brain. Usually a third resource (shared disk or witness server) that a node must "own" before it can go active. Majority-vote system.</span>
+        </div>
+        <div class="callout callout-mil">Active-passive = QRF staging. Active-active = two teams simultaneously running missions covering the same AO. Heartbeat = the radio check between them. If you lose comms (heartbeat fails), you need rules for who takes charge — that's quorum.</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Load Balancing</div>
+        <div class="def-grid">
+          <span class="def-term">Round Robin</span><span class="def-val">Requests distributed sequentially (Server 1, Server 2, Server 3, Server 1...). Simple and common. Works best when servers are equal capacity and requests are similar in load.</span>
+          <span class="def-term">Least Connections</span><span class="def-val">New request goes to server with fewest active connections. Better than round robin for variable-length sessions.</span>
+          <span class="def-term">Weighted</span><span class="def-val">More powerful servers get proportionally more traffic. Used in mixed-capacity server pools.</span>
+          <span class="def-term">Most Recently Used (MRU)</span><span class="def-val">New request goes to most recently used server (keeps session warm). Less common.</span>
+          <span class="def-term">Hardware LB</span><span class="def-val">Dedicated appliance (F5, Citrix NetScaler). Highest performance, highest cost.</span>
+          <span class="def-term">Software LB</span><span class="def-val">HAProxy, Nginx, Windows NLB. More flexible, lower cost, uses server CPU.</span>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">NIC Teaming / Link Aggregation</div>
+        <div class="def-grid">
+          <span class="def-term">NIC Teaming</span><span class="def-val">Combining multiple physical NICs into one logical interface. Provides redundancy (failover) and/or increased throughput.</span>
+          <span class="def-term">LACP (802.1ax)</span><span class="def-val">Link Aggregation Control Protocol. Dynamic negotiation of link aggregation. Both ends must support LACP. Old standard was 802.3ad, renamed 802.1ax-2008.</span>
+          <span class="def-term">Active-Active Teaming</span><span class="def-val">All NICs carry traffic simultaneously. Total bandwidth = sum of all NICs. If one fails, traffic continues on others.</span>
+          <span class="def-term">Active-Passive Teaming</span><span class="def-val">One NIC active, others on standby. No added bandwidth. Pure redundancy.</span>
+          <span class="def-term">STP Interaction</span><span class="def-val">Spanning Tree Protocol treats a LACP bond as a single logical link, not multiple links. No STP loop risk from teaming.</span>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Redundant Infrastructure</div>
+        <ul class="concept-list">
+          <li><strong>Redundant NICs</strong> — Two NICs to two different switches. If NIC or switch fails, traffic continues on the other path.</li>
+          <li><strong>Redundant Power Supplies</strong> — Two PSUs on two separate PDUs on two separate circuits from two separate UPS units ideally. Each PSU can run the server independently.</li>
+          <li><strong>Redundant Storage Paths (Multipathing)</strong> — Multiple HBA or NIC paths to SAN storage. If one path fails, I/O continues on the other. Software like MPIO (Windows) or DM-Multipath (Linux) manages this.</li>
+          <li><strong>Geo-Redundancy</strong> — Infrastructure spread across physically separate locations. Protects against site-level disasters.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CH 6 – SECURING THE SERVER
+  ═══════════════════════════════════════ -->
+  <section class="chapter" id="ch6">
+    <div class="chapter-header">
+      <span class="chapter-num">CH 06</span>
+      <h2 class="chapter-title">Securing the Server</h2>
+      <span class="chapter-obj">Obj 3.2 / 3.4 / 3.5</span>
+    </div>
+    <div class="chapter-body">
+
+      <div class="section-block">
+        <div class="section-title">Physical Security Controls</div>
+        <div class="def-grid">
+          <span class="def-term">Access Control Vestibule (Mantrap)</span><span class="def-val">Two-door airlock. First door must close and verify entry before second door opens. Prevents tailgating. Required at most data center entrances.</span>
+          <span class="def-term">Bollards</span><span class="def-val">Short sturdy posts preventing vehicle ramming attacks. Common in front of data centers and government facilities.</span>
+          <span class="def-term">Fencing</span><span class="def-val">Perimeter deterrent. Height determines effectiveness: 3–4 ft = minimal. 6–7 ft = deterrence (hard to climb). 8+ ft with barbed wire/concertina = strong protection. Taller fencing with outward-angled top maximizes delay time.</span>
+          <span class="def-term">Security Guards</span><span class="def-val">Active monitoring and response. Can adapt to situations cameras cannot handle. Retention camera policies critical for forensic investigations.</span>
+          <span class="def-term">Cameras / CCTV</span><span class="def-val">Deterrent and detective control. Footage retention policy = how long before it's overwritten. Critical for forensic investigations — set retention based on regulatory and business requirements.</span>
+          <span class="def-term">Biometric Locks</span><span class="def-val">Fingerprint, retina, facial recognition. "Something you are" — strongest factor. High security, higher cost.</span>
+          <span class="def-term">RFID / Smart Card</span><span class="def-val">"Something you have." Badge-based access. Immediately revocable. Often combined with PIN for two-factor. Logs every entry and exit for audit trail.</span>
+          <span class="def-term">Safes</span><span class="def-val">Secure physical storage for backup media, encryption keys, and sensitive documents. Fire-rated safes protect against both theft and fire damage.</span>
+          <span class="def-term">Faraday Cage</span><span class="def-val">Metal enclosure blocking RF/electromagnetic signals. Prevents wireless attacks and remote device activation. Used in SCIF environments.</span>
+          <span class="def-term">CPTED</span><span class="def-val">Crime Prevention Through Environmental Design. Lighting, layout, sight lines, and landscaping choices that naturally deter criminal activity without additional security personnel.</span>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Environmental Controls</div>
+        <div class="two-col">
+          <div>
+            <p class="mini-h">Fire Suppression</p>
+            <ul class="concept-list">
+              <li><strong>Wet Pipe</strong> — Water always in pipes. Fastest response. High electronics damage risk. Not preferred for server rooms.</li>
+              <li><strong>Dry Pipe</strong> — Air-pressurized. Water released only when triggered. Safer than wet pipe for electronics. Used in cold environments.</li>
+              <li><strong>Pre-action</strong> — Requires TWO triggers before water flows (smoke + heat/fusible link). Best for server rooms — prevents accidental activation.</li>
+              <li><strong>Deluge</strong> — All sprinklers open simultaneously. High-hazard areas only. Maximum damage risk.</li>
+              <li><strong>Clean Agents (Halon Replacements)</strong> — EPA-approved: Argon, NAF-S-III, FM-200. Suppress fire without water or residue. No electronics damage. Safe for occupied spaces.</li>
+            </ul>
+            <div class="callout callout-exam">Pre-action = safest for server rooms. Needs two independent triggers so accidental water release is nearly impossible. The slides explicitly call this out.</div>
+          </div>
+          <div>
+            <p class="mini-h">HVAC Standards (From Slides)</p>
+            <ul class="concept-list">
+              <li><strong>Temperature target:</strong> 68–75°F (20–24°C).</li>
+              <li><strong>Humidity target:</strong> 45–55% relative humidity. Below 40% = static (ESD) risk. Above 60% = condensation and corrosion risk.</li>
+              <li><strong>Monitoring alerts:</strong> SNMP (device monitoring), HTTP dashboards (web status), SMS (immediate out-of-range notification).</li>
+              <li><strong>CRAC sizing formula:</strong> IT load (watts) × 1.3 = BTU rating required.</li>
+            </ul>
+            <p class="mini-h">Sensors</p>
+            <ul class="concept-list">
+              <li><strong>PIR (Passive Infrared)</strong> — Detects changes in heat/infrared. Motion detection.</li>
+              <li><strong>Electromechanical</strong> — Break in electrical circuit (door/window contacts). Simplest sensor type.</li>
+              <li><strong>Photoelectric</strong> — Detects light changes (laser beam break, smoke).</li>
+              <li><strong>Acoustical</strong> — Microphones detect sound (glass break, forced entry).</li>
+              <li><strong>Wave Motion Detectors</strong> — Emit microwave or ultrasonic waves; detect changes in reflection caused by movement.</li>
+              <li><strong>Capacitance Detectors</strong> — Emit and monitor a magnetic field around a protected object. Disturbance triggers alarm.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Social Engineering Attacks</div>
+        <div class="def-grid">
+          <span class="def-term">Phishing</span><span class="def-val">Mass email attack. Casts a wide net. Generic "verify your account" emails.</span>
+          <span class="def-term">Spear Phishing</span><span class="def-val">Targeted phishing. Uses personal details to appear legitimate. Much higher success rate.</span>
+          <span class="def-term">Whaling</span><span class="def-val">Spear phishing targeting executives (CFO, CEO). High-value target. Often requests wire transfers or credential disclosure.</span>
+          <span class="def-term">Vishing</span><span class="def-val">Voice phishing. Phone call impersonating IT support, IRS, bank, etc.</span>
+          <span class="def-term">Shoulder Surfing</span><span class="def-val">Observing someone enter credentials. Physical proximity attack. Mitigate with privacy screens.</span>
+          <span class="def-term">Tailgating</span><span class="def-val">Following an authorized person through a secure door. Mitigate with mantrap and security awareness training.</span>
+          <span class="def-term">Dumpster Diving</span><span class="def-val">Searching trash for sensitive information. Mitigate with shredding and clean desk policy.</span>
+          <span class="def-term">Impersonation</span><span class="def-val">Pretending to be IT support, vendor, or authority figure to gain access or information.</span>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Data Security Risks & Malware Types</div>
+        <div class="def-grid">
+          <span class="def-term">Hardware Failure</span><span class="def-val">Causes downtime and denial of service. Mitigated by RAID, clustering, and redundant components.</span>
+          <span class="def-term">Malware</span><span class="def-val">Can damage, steal, or encrypt data. Mitigated by AV/anti-malware, HIDS/HIPS, and user training.</span>
+          <span class="def-term">Data Corruption</span><span class="def-val">Caused by improper shutdowns, hardware failure, or malware. Linux recovery: <code>fsck /dev/sda1</code>. Windows: <code>chkdsk</code>.</span>
+          <span class="def-term">Insider Threats</span><span class="def-val">High risk due to existing authorized access. Can be malicious or accidental. Mitigated by least privilege, auditing, and separation of duties.</span>
+          <span class="def-term">Theft / DLP</span><span class="def-val">Physical or data theft leads to breaches. Data Loss Prevention (DLP) tools monitor and block unauthorized data exfiltration.</span>
+        </div>
+        <p class="mini-h">Malware Types Tested on Server+</p>
+        <div class="def-grid">
+          <span class="def-term">Armored Virus</span><span class="def-val">Uses obfuscation and anti-disassembly techniques to prevent analysis and detection. Designed to confuse reverse engineering tools.</span>
+          <span class="def-term">Companion Virus</span><span class="def-val">Creates a malicious companion executable with the same name as a legitimate program. When the user runs the real program name, the virus executes first.</span>
+          <span class="def-term">Macro Virus</span><span class="def-val">Embedded in document files (Word, Excel). Executes when the document is opened and macros are enabled. Spreads through shared documents and email attachments.</span>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Server Hardening</div>
+        <p class="mini-h">Risk Mitigation Controls</p>
+        <div class="def-grid">
+          <span class="def-term">SIEM</span><span class="def-val">Security Information and Event Management. Centralizes log analysis and alerting across the environment. Correlates events from multiple sources to detect attacks.</span>
+          <span class="def-term">Two-Person Integrity</span><span class="def-val">Also called dual control or two-man rule. Requires two authorized individuals to be present and agree before a critical or sensitive action can be completed. Prevents single-person fraud or sabotage. Used for sensitive operations like key management and major configuration changes.</span>
+          <span class="def-term">Regulatory Constraints</span><span class="def-val">Legal requirements that mandate specific security controls (HIPAA, PCI DSS, SOX). Non-compliance = fines, loss of license, or legal liability.</span>
+        </div>
+        <p class="mini-h">OS Hardening</p>
+        <ul class="concept-list">
+          <li>Disable unused services — every running service is a potential attack surface.</li>
+          <li>Close unneeded ports — firewall rules deny by default, permit by exception.</li>
+          <li>Install only required software — unnecessary software = unnecessary vulnerabilities.</li>
+          <li>Apply all OS and driver updates promptly.</li>
+          <li>Configure host firewall (iptables on Linux, Windows Firewall).</li>
+          <li>Implement network access control (NAC) — verify device posture before allowing network access.</li>
+        </ul>
+        <p class="mini-h">Hardware Hardening</p>
+        <ul class="concept-list">
+          <li>Disable unused physical ports (USB, serial, optical) — prevents rogue device insertion.</li>
+          <li>Set BIOS/UEFI password — prevents unauthorized configuration changes.</li>
+          <li>Set boot order: internal drive first, disable PXE boot if not needed — prevents booting from unauthorized media.</li>
+          <li>Enable Secure Boot — prevents unsigned OS from loading.</li>
+        </ul>
+        <p class="mini-h">Host Security</p>
+        <ul class="concept-list">
+          <li><strong>HIDS</strong> — Host Intrusion Detection System. Monitors activity and alerts. Does NOT block. Good for forensics.</li>
+          <li><strong>HIPS</strong> — Host Intrusion Prevention System. Monitors AND actively blocks. May cause false-positive disruptions.</li>
+          <li><strong>Signature-Based Detection</strong> — Matches against known threat patterns. Fast, misses zero-days and novel attacks.</li>
+          <li><strong>Anomaly-Based Detection</strong> — Compares to normal baseline. Catches unknown threats. Higher false-positive rate.</li>
+          <li><strong>DLP</strong> — Data Loss Prevention. Monitors and blocks unauthorized data exfiltration (USB copy, email attachment, etc.).</li>
+        </ul>
+        <p class="mini-h">Patching Process</p>
+        <ul class="concept-list">
+          <li><strong>Test</strong> — Apply patches to non-production systems first. Verify nothing breaks.</li>
+          <li><strong>Deploy</strong> — Roll out to production using patch management tool (WSUS, SCCM, Ansible).</li>
+          <li><strong>Change Management</strong> — Document every patch applied, when, and by whom.</li>
+          <li><strong>Rollback plan</strong> — Always know how to reverse a patch if it causes issues.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CH 7 – SECURING DATA & NETWORK ACCESS
+  ═══════════════════════════════════════ -->
+  <section class="chapter" id="ch7">
+    <div class="chapter-header">
+      <span class="chapter-num">CH 07</span>
+      <h2 class="chapter-title">Securing Server Data & Network Access</h2>
+      <span class="chapter-obj">Obj 3.1 / 3.3 / 3.6</span>
+    </div>
+    <div class="chapter-body">
+
+      <div class="section-block">
+        <div class="section-title">Encryption</div>
+        <div class="def-grid">
+          <span class="def-term">Symmetric Encryption</span><span class="def-val">Same key encrypts and decrypts. Fast. Key distribution is the challenge. Examples: AES, 3DES.</span>
+          <span class="def-term">Asymmetric Encryption</span><span class="def-val">Public/private key pair. Public key encrypts, private key decrypts. Slower. Solves key distribution problem. Examples: RSA, ECC.</span>
+          <span class="def-term">PKI</span><span class="def-val">Public Key Infrastructure. Framework for managing digital certificates and asymmetric keys. CA (Certificate Authority) signs certificates to prove identity.</span>
+          <span class="def-term">Data at Rest — EFS</span><span class="def-val">Encrypting File System. File-level Windows encryption. Enterprise editions only. User-transparent once configured. Keys tied to user certificate.</span>
+          <span class="def-term">Data at Rest — BitLocker</span><span class="def-val">Full-disk encryption for Windows. Requires TPM chip. Encrypts entire volume. Protects against physical theft.</span>
+          <span class="def-term">Data at Rest — Tape</span><span class="def-val">LTO tape drives support hardware encryption. Must have consistent key management. All drives must support encryption. LTO-4 and later support 256-bit AES.</span>
+          <span class="def-term">TPM</span><span class="def-val">Trusted Platform Module. Hardware chip that securely stores encryption keys. Used by BitLocker and Secure Boot. Keys never leave the TPM in plaintext.</span>
+          <span class="def-term">Data in Transit — TLS</span><span class="def-val">Transport Layer Security. Replaced SSL (SSL is deprecated and insecure). Encrypts data moving between client and server. HTTPS = HTTP over TLS.</span>
+          <span class="def-term">SSL</span><span class="def-val">Secure Sockets Layer. Predecessor to TLS. Known vulnerable (POODLE, BEAST attacks). Should NEVER be used. On exams: say TLS, not SSL, for modern secure transport.</span>
+        </div>
+        <div class="callout callout-exam">EFS = file-level encryption (Windows enterprise). BitLocker = full disk encryption (uses TPM). For the exam: "file-level encryption on Windows enterprise" = EFS. "Full disk encryption on Windows" = BitLocker with TPM.</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">VPN & IPsec</div>
+        <div class="def-grid">
+          <span class="def-term">VPN</span><span class="def-val">Virtual Private Network. Encrypted tunnel across an untrusted network (internet). Makes remote access as if local.</span>
+          <span class="def-term">PPTP</span><span class="def-val">Point-to-Point Tunneling Protocol. Legacy VPN. Considered insecure. Uses port 1723.</span>
+          <span class="def-term">L2TP</span><span class="def-val">Layer 2 Tunneling Protocol. Often paired with IPsec for security (L2TP/IPsec). Port 1701.</span>
+          <span class="def-term">IPsec</span><span class="def-val">Internet Protocol Security. Suite of protocols for securing IP communications. Can authenticate, ensure integrity, and encrypt.</span>
+          <span class="def-term">AH (Auth Header)</span><span class="def-val">Provides authentication and integrity ONLY. No encryption. Data is protected from tampering but can be read. Protocol 51.</span>
+          <span class="def-term">ESP (Encapsulating Security Payload)</span><span class="def-val">Provides authentication, integrity, AND encryption. The complete package. Protocol 50. If a question mentions "encrypted" IPsec — the answer is ESP.</span>
+          <span class="def-term">SA (Security Association)</span><span class="def-val">Agreement between two peers defining which algorithms, keys, and settings to use. One SA per direction (two SAs per connection).</span>
+          <span class="def-term">SPI (Security Parameter Index)</span><span class="def-val">Database (table) on each device tracking all active SAs. Each device maintains its own SPI.</span>
+        </div>
+        <div class="callout callout-exam">AH = auth + integrity (NO encrypt). ESP = auth + integrity + encrypt. "Provides authentication but not encryption" = AH. "Provides all three" = ESP. This exact question appears regularly.</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Identity & Access Management</div>
+        <div class="def-grid">
+          <span class="def-term">Active Directory (AD)</span><span class="def-val">Microsoft's directory service. Centralized authentication and authorization. Objects: Users, Groups, Computers, OUs (Organizational Units). Domain controllers host AD.</span>
+          <span class="def-term">OU (Organizational Unit)</span><span class="def-val">Container within AD to organize objects. Group Policy Objects (GPOs) can be applied to OUs. Mirrors organizational structure.</span>
+          <span class="def-term">Group Policy (GPO)</span><span class="def-val">Centralized configuration management for Windows. Applied at Site, Domain, or OU level. Controls security settings, software deployment, desktop configuration.</span>
+          <span class="def-term">RBAC</span><span class="def-val">Role-Based Access Control. Permissions assigned to roles (job functions), not individuals. Users are assigned roles. Most common enterprise model. Easier to manage than per-user permissions.</span>
+          <span class="def-term">Rule-Based Access Control</span><span class="def-val">Access controlled by static rules (firewall ACLs, time-of-day restrictions). Not the same as RBAC despite similar name.</span>
+          <span class="def-term">DAC (Discretionary)</span><span class="def-val">Resource owner controls access permissions. Standard NTFS permissions — file owner decides who gets access.</span>
+          <span class="def-term">MAC (Mandatory)</span><span class="def-val">System enforces access based on security labels. Users cannot override. Used in government/military environments (SELinux, Orange Book). You cannot share a Top Secret file with a user with a Secret clearance even if you own it.</span>
+          <span class="def-term">Segregation of Duties</span><span class="def-val">No single person controls a complete critical process. Requires at least two people to complete sensitive transactions. Reduces fraud and insider threats.</span>
+          <span class="def-term">Principle of Least Privilege</span><span class="def-val">Users and processes receive only the minimum permissions needed to perform their function. Nothing more.</span>
+          <span class="def-term">MFA Factors</span><span class="def-val">Something you KNOW (password, PIN, security question). Something you HAVE (smartcard, token, phone). Something you ARE (fingerprint, retina, voice, facial recognition). True MFA requires two different factor TYPES.</span>
+          <span class="def-term">SSO</span><span class="def-val">Single Sign-On. Authenticate once, access multiple systems. Kerberos and SAML are common SSO protocols. Active Directory implements SSO for Windows domain environments.</span>
+        </div>
+        <div class="callout callout-exam">Password + PIN = NOT MFA (both "something you know"). Smartcard + fingerprint = MFA ("have" + "are"). Password + security question = NOT MFA (both "know"). Know the three factor categories cold.</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Decommissioning & Media Destruction</div>
+        <div class="def-grid">
+          <span class="def-term">Soft Wipe</span><span class="def-val">File deletion or quick format. Data can be recovered with forensic tools. NOT secure.</span>
+          <span class="def-term">Hard Wipe (Sanitization)</span><span class="def-val">Overwrite all sectors with zeros, ones, or random data. DoD 5220.22-M standard: 7 passes. Secure for HDDs. NOT effective on SSDs (due to wear leveling).</span>
+          <span class="def-term">Degaussing</span><span class="def-val">Strong magnetic field destroys magnetic data patterns. Renders HDD unusable — not just wiped, physically damaged. Most secure for magnetic media. INEFFECTIVE on SSDs, flash, or optical media.</span>
+          <span class="def-term">Shredding</span><span class="def-val">Physical destruction into small fragments. Absolute certainty. Required for classified media in many government environments.</span>
+          <span class="def-term">Crushing/Drilling</span><span class="def-val">Physical destruction. Piercing or crushing platters. Less thorough than shredding but faster and cheap.</span>
+          <span class="def-term">Incineration</span><span class="def-val">Burning. Used for classified/sensitive media. Complete destruction.</span>
+          <span class="def-term">SSD Sanitization</span><span class="def-val">Degaussing and overwriting don't work reliably on SSDs due to wear leveling and over-provisioned cells. Best options: manufacturer secure erase command (ATA Secure Erase), encryption + key destruction, or physical destruction.</span>
+        </div>
+        <div class="callout callout-exam">Degaussing = most secure for magnetic HDDs. Degaussing is INEFFECTIVE for SSDs, USB drives, or optical discs. For SSDs: physical destruction or cryptographic erasure (encrypt first, then destroy the key).</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CH 8 – NETWORKING & SCRIPTING
+  ═══════════════════════════════════════ -->
+  <section class="chapter" id="ch8">
+    <div class="chapter-header">
+      <span class="chapter-num">CH 08</span>
+      <h2 class="chapter-title">Networking & Scripting</h2>
+      <span class="chapter-obj">Obj 2.2 / 2.6</span>
+    </div>
+    <div class="chapter-body">
+
+      <div class="section-block">
+        <div class="section-title">Key Port Numbers — Complete Reference</div>
+        <div class="port-grid">
+          <div class="port-item"><span class="port-num">20/21</span><span class="port-name">File Transfer Protocol</span><span class="port-abbr">FTP</span></div>
+          <div class="port-item"><span class="port-num">22</span><span class="port-name">Secure Shell / SFTP</span><span class="port-abbr">SSH</span></div>
+          <div class="port-item"><span class="port-num">23</span><span class="port-name">Telnet (insecure, legacy)</span><span class="port-abbr">Telnet</span></div>
+          <div class="port-item"><span class="port-num">25</span><span class="port-name">Simple Mail Transfer Protocol</span><span class="port-abbr">SMTP</span></div>
+          <div class="port-item"><span class="port-num">53</span><span class="port-name">Domain Name Service</span><span class="port-abbr">DNS</span></div>
+          <div class="port-item"><span class="port-num">67/68</span><span class="port-name">Dynamic Host Config Protocol</span><span class="port-abbr">DHCP</span></div>
+          <div class="port-item"><span class="port-num">80</span><span class="port-name">Hypertext Transfer Protocol</span><span class="port-abbr">HTTP</span></div>
+          <div class="port-item"><span class="port-num">110</span><span class="port-name">Post Office Protocol v3</span><span class="port-abbr">POP3</span></div>
+          <div class="port-item"><span class="port-num">123</span><span class="port-name">Network Time Protocol</span><span class="port-abbr">NTP</span></div>
+          <div class="port-item"><span class="port-num">143</span><span class="port-name">Internet Message Access Protocol</span><span class="port-abbr">IMAP</span></div>
+          <div class="port-item"><span class="port-num">161/162</span><span class="port-name">SNMP (161=poll, 162=trap)</span><span class="port-abbr">SNMP</span></div>
+          <div class="port-item"><span class="port-num">389/3268</span><span class="port-name">Lightweight Directory Access Protocol</span><span class="port-abbr">LDAP</span></div>
+          <div class="port-item"><span class="port-num">443</span><span class="port-name">HTTP Secure (HTTP over TLS)</span><span class="port-abbr">HTTPS</span></div>
+          <div class="port-item"><span class="port-num">636/3269</span><span class="port-name">LDAP over SSL/TLS</span><span class="port-abbr">LDAPS</span></div>
+          <div class="port-item"><span class="port-num">989/990</span><span class="port-name">FTP over TLS/SSL</span><span class="port-abbr">FTPS</span></div>
+          <div class="port-item"><span class="port-num">1433</span><span class="port-name">Microsoft SQL Server</span><span class="port-abbr">MSSQL</span></div>
+          <div class="port-item"><span class="port-num">3306</span><span class="port-name">MySQL / MariaDB</span><span class="port-abbr">MySQL</span></div>
+          <div class="port-item"><span class="port-num">3389</span><span class="port-name">Remote Desktop Protocol</span><span class="port-abbr">RDP</span></div>
+          <div class="port-item"><span class="port-num">5985/5986</span><span class="port-name">WinRM (PowerShell Remoting)</span><span class="port-abbr">WinRM</span></div>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Network Configuration — Servers</div>
+        <div class="def-grid">
+          <span class="def-term">Static IP</span><span class="def-val">Manually assigned. Required for servers — you never want a server to change IP. DNS, DHCP, DC, and other infrastructure servers must be static.</span>
+          <span class="def-term">DHCP Reservation</span><span class="def-val">DHCP assigns same IP every time based on MAC address. Combines static predictability with DHCP management. Good for printers and some servers.</span>
+          <span class="def-term">VLAN</span><span class="def-val">Virtual LAN. Logical segmentation of a switch at Layer 2. Traffic between VLANs requires routing (Layer 3). Reduces broadcast domains, improves security.</span>
+          <span class="def-term">VLAN Tagging (802.1Q)</span><span class="def-val">Ethernet frames carry a VLAN ID tag. Switch ports: Access (untagged, one VLAN) or Trunk (tagged, multiple VLANs).</span>
+          <span class="def-term">Switch Spoofing</span><span class="def-val">Attacker tricks switch into treating their port as a trunk. Gains access to all VLANs. Fix: Disable DTP (Dynamic Trunking Protocol) on access ports.</span>
+          <span class="def-term">Double Tagging</span><span class="def-val">VLAN hopping attack. Attacker sends packet with two VLAN tags. Outer tag matches native VLAN and is stripped, inner tag routes to target VLAN. Fix: don't use VLAN 1 as native VLAN; assign unused VLAN as native.</span>
+          <span class="def-term">Default Gateway</span><span class="def-val">Router IP that handles traffic destined outside the local subnet. Must be configured on every server. Wrong gateway = no external connectivity.</span>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">DNS & DHCP</div>
+        <div class="def-grid">
+          <span class="def-term">DHCP DORA</span><span class="def-val">Discover (client broadcasts) → Offer (server responds with IP offer) → Request (client accepts offer) → Acknowledge (server confirms). Full lease process.</span>
+          <span class="def-term">APIPA</span><span class="def-val">Automatic Private IP Addressing. 169.254.x.x / 16. Self-assigned when DHCP fails. Device can only communicate with other APIPA addresses on same segment. Symptom of DHCP failure.</span>
+          <span class="def-term">IPv6 Link-Local</span><span class="def-val">FE80::/10 prefix. IPv6 equivalent of APIPA. Always auto-configured on every IPv6 interface. Scope limited to local link.</span>
+          <span class="def-term">FQDN</span><span class="def-val">Fully Qualified Domain Name. Complete address: hostname + domain + TLD. Example: mail.company.com. DNS resolves FQDN to IP.</span>
+          <span class="def-term">Hosts File</span><span class="def-val">Local override for DNS. <code>C:\Windows\System32\drivers\etc\hosts</code> (Windows). <code>/etc/hosts</code> (Linux). Checked before DNS query. Can be used for testing or override.</span>
+          <span class="def-term">Rogue DHCP</span><span class="def-val">Unauthorized DHCP server on network. Assigns wrong IP, gateway, or DNS — can redirect traffic for man-in-the-middle attack. Mitigate with DHCP snooping on managed switches.</span>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Firewalls</div>
+        <div class="def-grid">
+          <span class="def-term">Packet Filter</span><span class="def-val">Stateless. Evaluates each packet independently against ACL rules (source/dest IP, port, protocol). Fast, simple, limited context.</span>
+          <span class="def-term">Stateful Inspection</span><span class="def-val">Tracks connection state table. Understands established vs. new connections. More intelligent than packet filter. Can block response packets that don't match an established session.</span>
+          <span class="def-term">Application Layer (Proxy)</span><span class="def-val">Inspects payload content at Layer 7. Can block specific file types, URLs, commands. Slowest but most thorough.</span>
+          <span class="def-term">NGFW (Next-Gen Firewall)</span><span class="def-val">Combines stateful inspection + application awareness + IPS + user identity. Modern standard (Palo Alto, Fortinet, Cisco FTD).</span>
+          <span class="def-term">Dual-Homed Firewall</span><span class="def-val">Device with two NICs connecting two networks (internal + external). First line of defense between LAN and internet. No routing between interfaces without firewall inspection.</span>
+          <span class="def-term">DMZ</span><span class="def-val">Demilitarized Zone. Network segment between internal network and internet. Public-facing servers (web, email, DNS) go here. Isolated from internal LAN.</span>
+          <span class="def-term">iptables</span><span class="def-val">Linux host-based firewall. Replaced ipchains. Rules evaluated in order, first match wins. nftables is the modern successor.</span>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Scripting</div>
+        <table class="data-table">
+          <thead><tr><th>Language</th><th>Extension</th><th>Platform</th><th>Comment Syntax</th><th>Primary Use</th></tr></thead>
+          <tbody>
+            <tr><td><span class="hl-gold">Bash</span></td><td><code>.sh</code></td><td>Linux/macOS/Unix</td><td><code>#</code> (not <code>#!</code> — that's shebang)</td><td>System admin, automation, pipelines</td></tr>
+            <tr><td><span class="hl-gold">PowerShell</span></td><td><code>.ps1</code></td><td>Windows (also Linux)</td><td><code>#</code></td><td>Windows admin, cmdlets, AD management</td></tr>
+            <tr><td><span class="hl-gold">Batch</span></td><td><code>.bat / .cmd</code></td><td>Windows (legacy)</td><td><code>REM</code></td><td>Legacy Windows automation</td></tr>
+            <tr><td><span class="hl-gold">VBScript</span></td><td><code>.vbs</code></td><td>Windows</td><td><code>'</code> (apostrophe)</td><td>Legacy Windows scripting via WSH</td></tr>
+            <tr><td><span class="hl-gold">Python</span></td><td><code>.py</code></td><td>Cross-platform</td><td><code>#</code></td><td>Cross-platform admin, automation</td></tr>
+          </tbody>
+        </table>
+        <p class="mini-h">Key Scripting Concepts</p>
+        <div class="def-grid">
+          <span class="def-term">Shebang (<code>#!</code>)</span><span class="def-val">First line of a Unix script. Tells the OS which interpreter to use. <code>#!/bin/bash</code> = use Bash. NOT a comment even though it starts with #.</span>
+          <span class="def-term">Variables</span><span class="def-val">Store values. Bash: <code>VAR=10</code> (no spaces). PowerShell: <code>$var = 10</code>. Reference with <code>$VAR</code> (Bash) or <code>$var</code> (PowerShell).</span>
+          <span class="def-term">Environment Variables</span><span class="def-val">System: available to all users. User: available only to specific user when logged in. Program/Process: available only within that process.</span>
+          <span class="def-term">Loops</span><span class="def-val">for, while, do-while. Repeat operations. Essential for bulk tasks (process 1,000 users, rename 500 files).</span>
+          <span class="def-term">Conditionals</span><span class="def-val">if/else/elif. Execute code based on conditions. Compare values with comparators (==, !=, -gt, -lt in Bash; -eq, -ne in PowerShell).</span>
+          <span class="def-term">Integers</span><span class="def-val">Whole numbers. <code>COUNT=5</code></span>
+          <span class="def-term">Strings</span><span class="def-val">Character sequences in quotes. <code>"Hello"</code> or <code>'World'</code></span>
+          <span class="def-term">Arrays</span><span class="def-val">Collections of values. Bash: <code>NAMES=("Alice" "Bob" "Connor")</code>. Reference: <code>${NAMES[0]}</code></span>
+        </div>
+        <div class="callout callout-exam">PowerShell = .ps1 (uses cmdlets like Get-Process, Set-Item). Bash = .sh (uses commands like grep, awk, sed). Batch = .bat (Windows legacy, uses commands like ECHO, COPY). The shebang line (#!) is NOT a comment — it specifies the interpreter.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CH 9 – DISASTER RECOVERY
+  ═══════════════════════════════════════ -->
+  <section class="chapter" id="ch9">
+    <div class="chapter-header">
+      <span class="chapter-num">CH 09</span>
+      <h2 class="chapter-title">Disaster Recovery</h2>
+      <span class="chapter-obj">Obj 3.7 / 3.8</span>
+    </div>
+    <div class="chapter-body">
+
+      <div class="section-block">
+        <div class="section-title">Backup Types — Archive Bit Logic</div>
+        <table class="data-table">
+          <thead><tr><th>Type</th><th>Backs Up</th><th>Archive Bit After</th><th>Backup Speed</th><th>Restore Speed</th><th>Storage Needed</th></tr></thead>
+          <tbody>
+            <tr><td><span class="hl-gold">Full</span></td><td>Everything (ignores archive bit)</td><td><span class="good">Cleared</span></td><td><span class="bad">Slowest</span></td><td><span class="good">Fastest (1 set)</span></td><td><span class="bad">Most</span></td></tr>
+            <tr><td><span class="hl-gold">Incremental</span></td><td>Changed since last full OR incremental</td><td><span class="good">Cleared</span></td><td><span class="good">Fastest</span></td><td><span class="bad">Slowest (full + all incrementals)</span></td><td><span class="good">Least</span></td></tr>
+            <tr><td><span class="hl-gold">Differential</span></td><td>Changed since last FULL only</td><td><span class="bad">NOT cleared</span></td><td><span class="neutral">Medium (grows)</span></td><td><span class="neutral">Medium (full + latest diff)</span></td><td><span class="neutral">Medium</span></td></tr>
+            <tr><td><span class="hl-gold">Synthetic Full</span></td><td>Constructed from prior full + incrementals</td><td><span class="good">Cleared</span></td><td><span class="neutral">Medium</span></td><td><span class="good">Fast (1 set)</span></td><td><span class="neutral">Medium</span></td></tr>
+            <tr><td><span class="hl-gold">Snapshot</span></td><td>Point-in-time copy (copy-on-write or split mirror)</td><td>N/A</td><td><span class="good">Very fast</span></td><td><span class="good">Very fast</span></td><td>Varies</td></tr>
+          </tbody>
+        </table>
+        <div class="callout callout-exam">Incremental clears the archive bit after each run (so next incremental only gets new changes). Differential does NOT clear the bit (so it keeps accumulating all changes since last full). Differential grows larger each day but restores faster. Incremental stays small but needs multiple sets to restore.</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">RTO & RPO</div>
+        <div class="two-col">
+          <div class="callout callout-exam" style="margin:0">
+            <strong>RTO — Recovery Time Objective</strong><br>
+            Maximum acceptable downtime after a disaster. "How long can we be offline?"<br><br>
+            Low RTO = need fast recovery = hot site, clustered systems, automated failover.
+          </div>
+          <div class="callout callout-exam" style="margin:0">
+            <strong>RPO — Recovery Point Objective</strong><br>
+            Maximum acceptable data loss measured in time. "How much data can we lose?"<br><br>
+            Low RPO = need frequent backups or synchronous replication. RPO of 1 hour = must backup at least every hour.
+          </div>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Backup Media Rotation</div>
+        <div class="def-grid">
+          <span class="def-term">GFS (Grandfather-Father-Son)</span><span class="def-val">Son = daily. Father = weekly. Grandfather = monthly. Newest backup always goes to oldest media in rotation. Standard enterprise tape rotation scheme.</span>
+          <span class="def-term">FIFO</span><span class="def-val">First In, First Out. Simplest rotation. Reuse in order. Risk of tape degradation over time.</span>
+          <span class="def-term">3-2-1 Rule</span><span class="def-val">3 copies of data, on 2 different media types, with 1 copy offsite. Industry best practice for backup strategy.</span>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Backup Media Types</div>
+        <div class="def-grid">
+          <span class="def-term">Magnetic Tape</span><span class="def-val">LTO (Linear Tape-Open). Current standard: LTO-9 (18TB native / 45TB compressed). LTO-10 specified at 36TB native. Color-coded. Cheapest per TB for archival. Slow sequential access. Libraries connect via SCSI, FC, or iSCSI.</span>
+          <span class="def-term">HDD / NAS</span><span class="def-val">Disk-to-disk backup. Fast. More expensive per TB than tape. Good for short-term/recent backups. Enables fast restore.</span>
+          <span class="def-term">Cloud Storage</span><span class="def-val">Offsite by default. Scalable. Variable cost. Restore speed limited by bandwidth. Common for 3-2-1 "1 offsite" copy.</span>
+          <span class="def-term">Optical</span><span class="def-val">DVD/Blu-ray. Long shelf life. Read-only once written (WORM). Limited capacity. Used for archival or compliance.</span>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Disaster Recovery Sites</div>
+        <table class="data-table">
+          <thead><tr><th>Site Type</th><th>Equipment</th><th>Data Currency</th><th>Time to Activate</th><th>Cost</th></tr></thead>
+          <tbody>
+            <tr><td><span class="hl-gold">Hot Site</span></td><td>Fully operational. All hardware, network, power.</td><td>Real-time or near-real-time replication</td><td><span class="good">Minutes</span></td><td><span class="bad">Highest</span></td></tr>
+            <tr><td><span class="hl-gold">Warm Site</span></td><td>Hardware in place. Needs config and data restore.</td><td>Must restore from recent backup</td><td><span class="neutral">Hours</span></td><td><span class="neutral">Medium</span></td></tr>
+            <tr><td><span class="hl-gold">Cold Site</span></td><td>Physical space, power, cooling only. No equipment.</td><td>Must procure hardware AND restore data</td><td><span class="bad">Days to weeks</span></td><td><span class="good">Lowest</span></td></tr>
+          </tbody>
+        </table>
+        <div class="callout callout-mil">Hot site = fully crewed FOB ready to assume mission instantly. Warm site = staging area with vehicles and comms, but needs personnel and orders. Cold site = an empty warehouse with electricity — you have to build the FOB from scratch after the disaster. Cost goes up inversely with activation time.</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Replication</div>
+        <div class="def-grid">
+          <span class="def-term">Synchronous</span><span class="def-val">Write must complete on BOTH primary and secondary before the write is confirmed to the application. Zero data loss. Higher latency. Used for hot sites and mission-critical systems. Distance limited by latency tolerance.</span>
+          <span class="def-term">Asynchronous</span><span class="def-val">Write completes on primary, then replicates to secondary with a delay. Lower latency impact on primary. Some data loss possible (the replication lag = RPO). Used for warm sites and geographically distant replicas.</span>
+          <span class="def-term">Bidirectional</span><span class="def-val">Both sites are source and target. Changes on either side replicate to the other. Used in active-active DR configurations.</span>
+          <span class="def-term">Host-Based Replication</span><span class="def-val">Software on the server handles replication (server-to-server). Less expensive than SAN-based. More CPU overhead on source server.</span>
+          <span class="def-term">SAN-Based Replication</span><span class="def-val">Storage array handles replication. Transparent to server. Higher performance. Most enterprise DR environments use this.</span>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">DR Testing Methods</div>
+        <div class="def-grid">
+          <span class="def-term">Tabletop Exercise</span><span class="def-val">Discussion-based. No systems touched. Key personnel walk through a disaster scenario verbally. Identifies gaps in the plan. Most cost-effective. Start here.</span>
+          <span class="def-term">Simulated Failover</span><span class="def-val">Test recovery procedures in a non-production environment. Systems not actually failed over. Safer than live failover.</span>
+          <span class="def-term">Live Failover</span><span class="def-val">Primary site is actually taken offline. Traffic fails over to DR site. Most realistic test. Highest risk — if DR site has problems, you have a real outage. Riskiest test.</span>
+          <span class="def-term">Production vs. Non-Production</span><span class="def-val">Testing recovery functions in a parallel non-production copy. Verifies the process without risking production.</span>
+          <span class="def-term">Backup Validation</span><span class="def-val">Regularly restore from backup to verify backups are usable. A backup that can't restore is not a backup. Test restores on a schedule — monthly minimum for most environments.</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CH 10 – TROUBLESHOOTING HW/SW
+  ═══════════════════════════════════════ -->
+  <section class="chapter" id="ch10">
+    <div class="chapter-header">
+      <span class="chapter-num">CH 10</span>
+      <h2 class="chapter-title">Troubleshooting Hardware & Software Issues</h2>
+      <span class="chapter-obj">Obj 4.1 / 4.2 / 4.4</span>
+    </div>
+    <div class="chapter-body">
+
+      <div class="section-block">
+        <div class="section-title">CompTIA Troubleshooting Methodology — 7 Steps</div>
+        <div class="ts-steps">
+          <div class="ts-step"><strong>Identify the problem and scope.</strong> Question users. Identify recent changes. Collect logs. Replicate if possible. Back up before making changes. Escalate if necessary.</div>
+          <div class="ts-step"><strong>Establish a theory of probable cause.</strong> Question the obvious. Look for common elements across multiple symptoms. Start with simplest explanation.</div>
+          <div class="ts-step"><strong>Test the theory.</strong> If confirmed → determine next steps. If not confirmed → establish a new theory. Return to step 2.</div>
+          <div class="ts-step"><strong>Establish a plan of action.</strong> Determine how to fix it. Notify all impacted users before beginning.</div>
+          <div class="ts-step"><strong>Implement the solution or escalate.</strong> Make ONE change at a time. Test after each change. If change doesn't fix it, reverse it before trying the next thing.</div>
+          <div class="ts-step"><strong>Verify full functionality.</strong> Confirm the system works correctly. Implement preventive measures so the problem doesn't recur.</div>
+          <div class="ts-step"><strong>Document findings, actions, and outcomes.</strong> Record everything: what the problem was, what caused it, what fixed it, what was done preventively.</div>
+        </div>
+        <div class="callout callout-mil">This is your SMEAC for tech problems. Always document — it's your after-action report. The next technician who hits this problem (or the next you) will thank you. Never make more than one change at a time or you won't know what fixed it.</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Common Hardware Problems</div>
+        <div class="def-grid">
+          <span class="def-term">SMART Failure</span><span class="def-val">Self-Monitoring Analysis and Reporting Technology. Drive predicts its own failure. Check via <code>wmic diskdrive get status</code> (Windows). "OK" = healthy. SMART failure = replace drive soon.</span>
+          <span class="def-term">CMOS Battery Failure</span><span class="def-val">Server loses date/time when powered off. Settings revert to defaults. Replace CR2032 lithium cell. Cheap fix, easy symptom to miss.</span>
+          <span class="def-term">POST Beep Codes</span><span class="def-val">BIOS beep patterns during POST indicate which component failed. 1 long + 2 short = video card (common). Varies by BIOS manufacturer. Check documentation.</span>
+          <span class="def-term">BSOD (Windows)</span><span class="def-val">Kernel crash. First question: "What changed recently?" Unplug external devices, check drivers, look at stop code, review memory dump.</span>
+          <span class="def-term">Purple Screen (VMware)</span><span class="def-val">VMkernel crash on ESXi host. Equivalent of BSOD for VMware. Check ESXi logs and PSOD (Purple Screen of Death) error code.</span>
+          <span class="def-term">Kernel Panic (Linux)</span><span class="def-val">Linux kernel crash. System halts. Cannot safely recover. Often caused by hardware failure or bad driver/module.</span>
+          <span class="def-term">Memory Leak</span><span class="def-val">Process allocates RAM and never releases it. Server slows over time. Fix: restart the leaking service. Long-term: patch or replace the software.</span>
+          <span class="def-term">Runaway Process</span><span class="def-val">Process consuming excessive CPU or memory. Windows: Task Manager → End Task. Linux: <code>top</code> to identify, <code>kill -9 [PID]</code> to terminate.</span>
+          <span class="def-term">Thermal/Overheating</span><span class="def-val">Check fans, clean dust, verify baffles are in place. Symptoms: thermal throttling, random crashes, burning smell, high temperature alerts.</span>
+          <span class="def-term">Power Supply Fault</span><span class="def-val">Random crashes, no POST, intermittent operation. Check PSU LEDs on server. Swap with known-good PSU if available.</span>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">OS & Software Troubleshooting</div>
+        <div class="def-grid">
+          <span class="def-term">SFC (System File Checker)</span><span class="def-val">Windows: <code>sfc /scannow</code>. Validates and repairs corrupted system files. Run from elevated command prompt.</span>
+          <span class="def-term">Tripwire</span><span class="def-val">File integrity monitoring. Takes cryptographic hash of system files. Alerts if any file changes unexpectedly. Available for both Windows and Linux.</span>
+          <span class="def-term">Clock Skew</span><span class="def-val">Time difference between systems. Kerberos authentication fails if clock skew exceeds 5 minutes. Fix: sync all systems to NTP (port 123). Check CMOS battery if clock resets on power off.</span>
+          <span class="def-term">HCL</span><span class="def-val">Hardware Compatibility List. If hardware isn't on the HCL for the OS, expect driver errors, instability, or refused installation. Check before purchasing.</span>
+          <span class="def-term">Buffer Overrun</span><span class="def-val">Application writes more data to a buffer than it can hold, overwriting adjacent memory. Can cause crashes, data corruption, and code execution vulnerabilities. Prevent with bounds checking, ASLR, DEP.</span>
+          <span class="def-term">Version Compatibility</span><span class="def-val">Backward compatibility = newer software works with older data/systems. Forward compatibility = older software works with newer data/systems. Check release notes before any upgrade — incompatibility causes unexpected failures.</span>
+          <span class="def-term">Service Dependencies</span><span class="def-val">Services that require other services to be running first. If a dependency fails, the dependent service fails. Windows: Services MMC shows dependencies. Linux: <code>systemctl list-dependencies</code>. Always review before stopping services to avoid cascading failures.</span>
+          <span class="def-term">Driver Incompatibility</span><span class="def-val">Wrong driver version for hardware or OS. Causes device failures, crashes, and errors. Fix: download correct driver from manufacturer. Roll back via Device Manager if update caused the problem.</span>
+          <span class="def-term">CPU Affinity</span><span class="def-val">Binding a process to a specific CPU core. Can improve cache performance in NUMA systems. Improperly set affinity restricts performance.</span>
+          <span class="def-term">Safe Mode (Windows)</span><span class="def-val">Boots with minimal drivers and services. Use to isolate startup problems, remove bad drivers, run malware scans.</span>
+          <span class="def-term">Single User Mode (Linux)</span><span class="def-val">Linux equivalent of Safe Mode. Root access, minimal services. Used for system repair and password recovery.</span>
+          <span class="def-term">Soft Reboot</span><span class="def-val">Graceful OS-initiated shutdown and restart. Flushes buffers, closes open files, lets services stop cleanly. <code>shutdown /r</code> (Windows) or <code>reboot</code> (Linux). Always preferred.</span>
+          <span class="def-term">Hard Reboot</span><span class="def-val">Physical power cycle — hold power button or press reset. No graceful shutdown. Risk of file system corruption and data loss. Last resort when OS is completely unresponsive.</span>
+          <span class="def-term">WSUS</span><span class="def-val">Windows Server Update Services. Centralized patch management. Approves and deploys patches to Windows systems in the domain.</span>
+          <span class="def-term">RPM</span><span class="def-val">Red Hat Package Manager. Linux package management for RHEL/CentOS. <code>rpm -i package.rpm</code> to install.</span>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Privilege Escalation & Configuration Management</div>
+        <div class="def-grid">
+          <span class="def-term">runas (Windows)</span><span class="def-val">Run a program under a different user account without logging off. Used to execute admin tasks from a standard user session. Syntax: <code>runas /user:domain\admin cmd</code>.</span>
+          <span class="def-term">sudo (Linux)</span><span class="def-val">Superuser Do. Executes a single command with elevated (root) privileges. Logged to auth log. Preferred over su — limits scope of privilege and creates an audit trail.</span>
+          <span class="def-term">su (Linux)</span><span class="def-val">Switch User. <code>su -</code> switches to root with root's full environment. Grants a full root session — higher risk and less auditable than sudo.</span>
+          <span class="def-term">SCCM</span><span class="def-val">System Center Configuration Manager (Microsoft). Enterprise Windows patch management, software deployment, inventory, and compliance reporting. Deploy software and enforce settings at scale.</span>
+          <span class="def-term">Puppet / Chef</span><span class="def-val">Agent-based configuration management tools. Define desired system state in code. Agents on managed nodes continuously enforce configuration. Cross-platform (Windows and Linux).</span>
+          <span class="def-term">Ansible</span><span class="def-val">Agentless configuration management. Uses SSH. Playbooks written in YAML. No agent required on managed nodes. Simpler to deploy than Puppet/Chef. Widely used for both Linux and Windows.</span>
+          <span class="def-term">GPO</span><span class="def-val">Group Policy Object. Windows Active Directory. Applies configuration to users and computers in the domain. Controls security settings, software deployment, login scripts. Applied in LSDOU order: Local → Site → Domain → OU.</span>
+        </div>
+        <div class="callout callout-exam">sudo runs ONE command as root and logs it. su grants a full root shell — riskier and less auditable. Always prefer sudo. Puppet/Chef = agent-based (pull model). Ansible = agentless (push via SSH). All three enforce desired configuration state and are specifically called out in the Server+ slides.</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Visual & Auditory Diagnostic Cues</div>
+        <ul class="concept-list">
+          <li><strong>LED Indicators</strong> — #1: System ID (identify which server). #2: Safe to remove. #3: Service action required (fault). #4: Power/OK status.</li>
+          <li><strong>LCD Panel</strong> — Some enterprise servers have front-panel LCD showing status codes, temperatures, and error messages.</li>
+          <li><strong>Beep Codes</strong> — Different patterns indicate different POST failure types. Must check vendor documentation — not universal.</li>
+          <li><strong>Burning Smell</strong> — Immediate hardware failure or overheating. Power down immediately.</li>
+          <li><strong>Clicking/Grinding</strong> — HDD mechanical failure. Back up immediately. Replace drive.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CH 11 – NETWORK CONNECTIVITY & SECURITY
+  ═══════════════════════════════════════ -->
+  <section class="chapter" id="ch11">
+    <div class="chapter-header">
+      <span class="chapter-num">CH 11</span>
+      <h2 class="chapter-title">Network Connectivity & Security Issues</h2>
+      <span class="chapter-obj">Obj 4.5 / 4.6</span>
+    </div>
+    <div class="chapter-body">
+
+      <div class="section-block">
+        <div class="section-title">Network Troubleshooting Checklist</div>
+        <div class="ts-steps">
+          <div class="ts-step">Check physical: link lights on NIC and switch port, cable integrity, correct cable type (straight-through vs crossover).</div>
+          <div class="ts-step">Verify IP config: <code>ipconfig</code> (Windows) or <code>ip a</code> (Linux). Check IP, subnet mask, default gateway, DNS server.</div>
+          <div class="ts-step">Ping loopback: <code>ping 127.0.0.1</code>. If this fails, TCP/IP stack is broken. Reinstall TCP/IP.</div>
+          <div class="ts-step">Ping local IP. Ping default gateway. Ping external IP. Ping external hostname. Isolate where connectivity breaks down.</div>
+          <div class="ts-step">If can ping IP but not hostname → DNS issue. Check DNS server config, hosts file, DHCP-assigned DNS server.</div>
+          <div class="ts-step">Trace the route: <code>tracert</code> (Windows) / <code>traceroute</code> (Linux). Identify which hop is dropping packets.</div>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Common Errors & Root Causes</div>
+        <div class="def-grid">
+          <span class="def-term">169.254.x.x address</span><span class="def-val">APIPA — DHCP failure. Device couldn't reach DHCP server. Check DHCP server, switch port, rogue DHCP.</span>
+          <span class="def-term">Destination Host Unreachable</span><span class="def-val">No route to target. Cause: wrong default gateway, routing table issue, router down, ISP failure.</span>
+          <span class="def-term">Request Timed Out</span><span class="def-val">Packet sent but no response. Could be firewall blocking ICMP, host down, or packet loss on path.</span>
+          <span class="def-term">Unknown Host</span><span class="def-val">Hostname cannot be resolved. DNS failure. Check DNS server, DHCP DNS assignment, hosts file.</span>
+          <span class="def-term">Can ping IP, not hostname</span><span class="def-val">DNS issue. Network works, name resolution doesn't. Fix: correct DNS server address, fix DNS zone, update hosts file.</span>
+          <span class="def-term">Cannot reach remote subnet</span><span class="def-val">Wrong subnet mask or wrong default gateway configured. Or router/routing table issue.</span>
+          <span class="def-term">Rogue DHCP</span><span class="def-val">Unauthorized DHCP server assigns wrong config. Fix: enable DHCP snooping on managed switches — only allows DHCP responses from trusted ports.</span>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Network Diagnostic Commands</div>
+        <table class="data-table">
+          <thead><tr><th>Command</th><th>OS</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code class="hl-blue">ipconfig /all</code></td><td>Windows</td><td>Show full IP config, MAC address, DNS servers, DHCP lease info.</td></tr>
+            <tr><td><code class="hl-blue">ip addr / ip a</code></td><td>Linux</td><td>Show IP configuration on all interfaces.</td></tr>
+            <tr><td><code class="hl-blue">ping</code></td><td>Both</td><td>Test ICMP connectivity to a host. -t flag (Windows) = continuous ping.</td></tr>
+            <tr><td><code class="hl-blue">tracert</code></td><td>Windows</td><td>Trace packet route hop by hop. Identifies where traffic fails.</td></tr>
+            <tr><td><code class="hl-blue">traceroute</code></td><td>Linux/Router</td><td>Linux/router equivalent of tracert.</td></tr>
+            <tr><td><code class="hl-blue">nslookup</code></td><td>Windows</td><td>DNS query tool. Test name resolution and query specific DNS servers.</td></tr>
+            <tr><td><code class="hl-blue">dig</code></td><td>Linux</td><td>Powerful DNS query tool. More detail than nslookup. Query specific records.</td></tr>
+            <tr><td><code class="hl-blue">netstat -an</code></td><td>Both</td><td>Show all active connections and listening ports with addresses.</td></tr>
+            <tr><td><code class="hl-blue">netstat -r</code></td><td>Both</td><td>Display routing table.</td></tr>
+            <tr><td><code class="hl-blue">route print</code></td><td>Windows</td><td>Display IPv4 routing table.</td></tr>
+            <tr><td><code class="hl-blue">nbtstat -n</code></td><td>Windows</td><td>Show NetBIOS names on local machine. Legacy but still tested.</td></tr>
+            <tr><td><code class="hl-blue">telnet [host] [port]</code></td><td>Both</td><td>Test connectivity to a specific TCP port. Useful for firewall testing. <em>Do not use for actual remote management — insecure.</em></td></tr>
+            <tr><td><code class="hl-blue">nc (netcat)</code></td><td>Linux</td><td>Network Swiss army knife. Test port connectivity, transfer files, port scan.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Security Troubleshooting</div>
+        <div class="def-grid">
+          <span class="def-term">Misconfigured permissions</span><span class="def-val">Users accessing unauthorized resources or blocked from authorized ones. Audit ACLs, group memberships, NTFS permissions, share permissions.</span>
+          <span class="def-term">Firewall misconfig</span><span class="def-val">Blocking legitimate traffic or allowing unauthorized. Check rule order (rules evaluated top-down, first match wins). Test with telnet to specific ports.</span>
+          <span class="def-term">SELinux blocking</span><span class="def-val">Common on RHEL/CentOS. Application won't start even with correct file permissions. Check audit log: <code>/var/log/audit/audit.log</code>. Set to permissive mode to test: <code>setenforce 0</code>.</span>
+          <span class="def-term">UAC blocking (Windows)</span><span class="def-val">User Account Control prompting or silently blocking. Run as administrator or adjust UAC policy via GPO.</span>
+          <span class="def-term">Group Policy conflict</span><span class="def-val">GPO overriding local settings. Run <code>gpresult /r</code> to see applied policies. Check which GPO is setting the conflicting value.</span>
+          <span class="def-term">Anti-malware false positive</span><span class="def-val">Security tool blocking legitimate software. Whitelist or create exception for the application. Verify the detection is actually a false positive first.</span>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Security Tools</div>
+        <div class="def-grid">
+          <span class="def-term">Port Scanner</span><span class="def-val">Identifies open ports and services on a host. Nmap is the standard. Use for auditing, not attack (in authorized environments).</span>
+          <span class="def-term">Packet Sniffer</span><span class="def-val">Captures and analyzes network traffic. Wireshark is the standard. Captures frames, decodes protocols, filters traffic.</span>
+          <span class="def-term">SIEM</span><span class="def-val">Security Information and Event Management. Aggregates logs from multiple sources, correlates events, generates alerts. Examples: Splunk, IBM QRadar, Microsoft Sentinel.</span>
+          <span class="def-term">Anti-malware</span><span class="def-val">Signature-based (known threats) + heuristic/behavioral (unknown threats). Should run on every server.</span>
+          <span class="def-term">File Integrity Checker</span><span class="def-val">Tripwire, AIDE. Takes cryptographic hash of files. Detects unauthorized modifications. Good for detecting malware that modifies system files.</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CH 12 – TROUBLESHOOTING STORAGE
+  ═══════════════════════════════════════ -->
+  <section class="chapter" id="ch12">
+    <div class="chapter-header">
+      <span class="chapter-num">CH 12</span>
+      <h2 class="chapter-title">Troubleshooting Storage Issues</h2>
+      <span class="chapter-obj">Obj 4.3</span>
+    </div>
+    <div class="chapter-body">
+
+      <div class="section-block">
+        <div class="section-title">Common Storage Problems</div>
+        <div class="def-grid">
+          <span class="def-term">Drive Not Available / Can't Mount</span><span class="def-val">Check physical connection, backplane power, SAS/SATA cables, driver, filesystem type compatibility. Also check if drive shows in BIOS/UEFI even if OS can't see it.</span>
+          <span class="def-term">Data Corruption</span><span class="def-val">Linux: <code>fsck /dev/sda1</code> (must unmount first). Windows: <code>chkdsk C: /f /r</code>. Check for bad sectors. May indicate drive failure — run SMART diagnostics.</span>
+          <span class="def-term">Slow I/O Performance</span><span class="def-val">Could be: degraded RAID (rebuild in progress), failing drive, cache failure, network saturation (NAS), incorrect RAID configuration, fragmentation (HDD).</span>
+          <span class="def-term">Restore Failure</span><span class="def-val">Backup tape/file is corrupt or unreadable. This is why you test restores regularly. Check media, verify backup software, try alternate restore method.</span>
+          <span class="def-term">Cache Battery Failure</span><span class="def-val">RAID controller write cache disabled (unsafe to use without battery). Write performance drops dramatically. System may log warning. Replace cache battery on RAID controller.</span>
+          <span class="def-term">Array Rebuild</span><span class="def-val">After drive replacement in a RAID array, the array must rebuild. Performance degrades during rebuild. RAID 5/6 vulnerable to additional failure during rebuild — this is the danger window.</span>
+          <span class="def-term">Corrupt Boot Sector / MBR</span><span class="def-val">Server won't boot. Boot from installation media, use repair tools. Windows: <code>bootrec /fixmbr</code>, <code>bootrec /fixboot</code>.</span>
+          <span class="def-term">Missing GRUB/LILO</span><span class="def-val">Linux bootloader gone or misconfigured. Boot from live media, <code>chroot</code> into the system, reinstall GRUB: <code>grub-install /dev/sda</code>.</span>
+          <span class="def-term">Mismatched Drives in RAID</span><span class="def-val">All drives in an array should match speed, capacity, and interface (architecture). Mismatched drives cause performance problems and may prevent array from functioning.</span>
+          <span class="def-term">Backplane Failure</span><span class="def-val">All drives connected through the backplane become unavailable. Server may not see any drives in the affected bays. Replace backplane.</span>
+          <span class="def-term">Improper RAID Configuration</span><span class="def-val">Wrong RAID level for use case, or misconfigured during setup (wrong stripe size, wrong disk order). May require full rebuild to correct.</span>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Page/Swap File Performance Indicators</div>
+        <div class="callout callout-warning">These Windows Performance Monitor counters indicate memory pressure causing excessive disk paging. If you see these thresholds exceeded, the server needs more RAM — not just disk tuning.</div>
+        <div class="def-grid">
+          <span class="def-term">Free System Page Table Entries &lt;5,000</span><span class="def-val">System nearly out of page table entries. Likely memory leak.</span>
+          <span class="def-term">Pool Nonpaged Bytes &gt;175MB</span><span class="def-val">Kernel nonpaged pool abnormally large. Indicates possible driver memory leak.</span>
+          <span class="def-term">Pool Paged Bytes &gt;250MB</span><span class="def-val">Kernel paged pool unusually large.</span>
+          <span class="def-term">Pages/Second &gt;1,000</span><span class="def-val">Severe thrashing. System spending most of its time paging data in and out of RAM. Add RAM immediately.</span>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Storage Diagnostic Commands</div>
+        <table class="data-table">
+          <thead><tr><th>Command</th><th>OS</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code class="hl-blue">fsck /dev/sda1</code></td><td>Linux</td><td>Filesystem check and repair. Must unmount first. <code>-y</code> flag auto-answers yes to repairs.</td></tr>
+            <tr><td><code class="hl-blue">chkdsk C: /f /r</code></td><td>Windows</td><td>Check disk for errors (/f = fix) and bad sectors (/r = recover). Requires reboot if drive is in use.</td></tr>
+            <tr><td><code class="hl-blue">badblocks /dev/sda</code></td><td>Linux</td><td>Test drive for bad sectors. Destructive write test option available. Slow but thorough.</td></tr>
+            <tr><td><code class="hl-blue">smartctl -a /dev/sda</code></td><td>Linux</td><td>Full SMART attribute report for a drive. Shows health status, error counts, temperature, hours powered on.</td></tr>
+            <tr><td><code class="hl-blue">wmic diskdrive get status</code></td><td>Windows</td><td>Basic SMART status check. "OK" = healthy. Anything else = investigate.</td></tr>
+            <tr><td><code class="hl-blue">fdisk -l</code></td><td>Linux</td><td>List all disks and their partition tables.</td></tr>
+            <tr><td><code class="hl-blue">sudo fdisk /dev/sda</code></td><td>Linux</td><td>Interactive partition manager for a specific disk.</td></tr>
+            <tr><td><code class="hl-blue">diskpart</code></td><td>Windows</td><td>Windows CLI partition and volume management tool.</td></tr>
+            <tr><td><code class="hl-blue">mount / umount</code></td><td>Linux</td><td>Mount or unmount a filesystem. <code>mount -a</code> mounts all entries in /etc/fstab.</td></tr>
+            <tr><td><code class="hl-blue">net use</code></td><td>Windows</td><td>Map or disconnect network drives (Windows equivalent of mount for network shares).</td></tr>
+            <tr><td><code class="hl-blue">df -h</code></td><td>Linux</td><td>Show disk space usage on all mounted filesystems in human-readable format.</td></tr>
+            <tr><td><code class="hl-blue">du -sh /path</code></td><td>Linux</td><td>Show disk usage of a specific directory.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title">Linux Log File Reference</div>
+        <div class="def-grid">
+          <span class="def-term"><code>/var/log/messages</code></span><span class="def-val">General system and kernel messages. Start here for most problems.</span>
+          <span class="def-term"><code>/var/log/syslog</code></span><span class="def-val">General system log on Debian/Ubuntu systems (equivalent to /var/log/messages on RHEL).</span>
+          <span class="def-term"><code>/var/log/auth.log</code></span><span class="def-val">Authentication events: logins, sudo usage, failed login attempts.</span>
+          <span class="def-term"><code>/var/log/kern.log</code></span><span class="def-val">Kernel messages. Hardware errors, driver issues, kernel panics appear here.</span>
+          <span class="def-term"><code>/var/log/boot.log</code></span><span class="def-val">Boot process messages. Services starting/failing during boot.</span>
+          <span class="def-term"><code>/var/log/cron.log</code></span><span class="def-val">Scheduled cron job execution and failures.</span>
+          <span class="def-term"><code>/var/log/httpd/</code></span><span class="def-val">Apache web server access and error logs (RHEL/CentOS).</span>
+          <span class="def-term"><code>/var/log/nginx/</code></span><span class="def-val">Nginx web server logs.</span>
+          <span class="def-term"><code>/var/log/mysqld.log</code></span><span class="def-val">MySQL/MariaDB database server log.</span>
+          <span class="def-term"><code>/var/log/secure</code></span><span class="def-val">Security and authentication log on RHEL/CentOS (equivalent to auth.log).</span>
+          <span class="def-term"><code>/var/log/audit/audit.log</code></span><span class="def-val">SELinux audit log. Check here when SELinux is blocking something.</span>
+          <span class="def-term"><code>/var/log/yum.log</code></span><span class="def-val">YUM package manager activity (RHEL/CentOS).</span>
+          <span class="def-term"><code>journalctl</code></span><span class="def-val">systemd's centralized log viewer on modern Linux. <code>journalctl -xe</code> = recent errors. <code>journalctl -u nginx</code> = logs for a specific service.</span>
+        </div>
+        <div class="callout callout-mil">Logs are your SIGACT log. When something happens on a server, the evidence is in the logs. Know where to look and how to read them. On modern systemd Linux: <code>journalctl -xe</code> is your first stop — it shows recent errors across the entire system in one command.</div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<footer class="site-footer">
+  COMPTIA SERVER+ SK0-005 · v2 COMPLETE EDITION · STAR V LEARNING CENTERS · JACKSONVILLE, FL<br>
+  SLIDES + EXAM OBJECTIVES + HOMELAB CONTEXT · ALL GAPS FROM v1 PATCHED
+</footer>
+
+</body>
+</html>
